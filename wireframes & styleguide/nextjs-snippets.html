@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Next.js VSCode Snippets</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #141414;
+    --bg3: #1e1e1e;
+    --border: #2a2a2a;
+    --muted: #555;
+    --text-sub: #888;
+    --text: #f5f5f0;
+    --accent: #CAFF00;
+    --accent2: #7B2FBE;
+    --red: #ff5f5f;
+    --green: #4ade80;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    padding: 48px 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .doc-header {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 28px;
+    margin-bottom: 56px;
+  }
+  .doc-header-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .doc-header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    letter-spacing: 4px;
+    line-height: 1;
+    color: var(--text);
+  }
+  .doc-header h1 em { color: var(--accent); font-style: normal; }
+  .doc-header p {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-top: 10px;
+    letter-spacing: 1px;
+    line-height: 1.6;
+  }
+
+  /* SECTION */
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  section { margin-bottom: 64px; }
+
+  /* LANG BADGE */
+  .lang-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .lang-badge.js { background: #3b2e00; border: 1px solid #f5a623; color: #f5a623; }
+  .lang-badge.ts { background: #001e3c; border: 1px solid #3b82f6; color: #3b82f6; }
+  .lang-badge.both { background: #1a1a2e; border: 1px solid var(--accent2); color: var(--accent2); }
+
+  /* SNIPPET CARD */
+  .snippets { display: flex; flex-direction: column; gap: 16px; }
+
+  .snippet-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--bg2);
+  }
+
+  .snippet-header {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .snippet-prefix {
+    background: var(--bg3);
+    border-right: 1px solid var(--border);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .snippet-prefix code {
+    font-family: 'Space Mono', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1px;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .snippet-meta {
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+  .snippet-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .snippet-desc {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-sub);
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+  }
+
+  .snippet-badges {
+    padding: 8px 16px;
+    display: flex;
+    gap: 6px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg3);
+  }
+  .badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+  .badge.js { background: #3b2e00; border: 1px solid #f5a623; color: #f5a623; }
+  .badge.ts { background: #001e3c; border: 1px solid #3b82f6; color: #3b82f6; }
+  .badge.use { background: var(--bg); border: 1px solid var(--border); color: var(--text-sub); }
+
+  .snippet-code {
+    padding: 16px;
+    overflow-x: auto;
+  }
+  pre {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--text-sub);
+    white-space: pre;
+  }
+
+  /* syntax highlight classes */
+  .kw { color: #c792ea; }   /* keyword */
+  .fn { color: #82aaff; }   /* function */
+  .str { color: #c3e88d; }  /* string */
+  .cm { color: #546e7a; font-style: italic; } /* comment */
+  .acc { color: var(--accent); } /* accent — type names, exports */
+  .num { color: #f78c6c; }  /* numbers/booleans */
+  .prop { color: #f07178; } /* property */
+
+  /* NOTE BLOCK */
+  .note {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 14px 16px;
+    border-radius: 2px;
+    background: var(--bg2);
+    margin-bottom: 20px;
+  }
+  .note-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .note p {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-sub);
+    letter-spacing: 0.5px;
+    line-height: 1.7;
+  }
+
+  /* WARN BLOCK */
+  .warn {
+    border: 1px solid #f5a623;
+    border-left: 3px solid #f5a623;
+    padding: 14px 16px;
+    border-radius: 2px;
+    background: #3b2e0022;
+    margin-bottom: 20px;
+  }
+  .warn .note-label { color: #f5a623; }
+  .warn p { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-sub); letter-spacing: 0.5px; line-height: 1.7; }
+
+  code {
+    font-family: 'Space Mono', monospace;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 2px;
+  }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  /* quick ref table */
+  .quick-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+  }
+  .quick-table th {
+    background: var(--bg3);
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 9px;
+    padding: 10px 14px;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+  .quick-table td {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    color: var(--text-sub);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .quick-table tr:hover td { background: var(--bg2); }
+  .quick-table td:first-child { color: var(--accent); font-weight: 700; white-space: nowrap; }
+  .quick-table td:nth-child(2) { color: var(--text); }
+  .badge-js-inline { color: #f5a623; }
+  .badge-ts-inline { color: #3b82f6; }
+  .badge-both-inline { color: var(--accent2); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-header-meta">VSCode Extension · Reference Guide</div>
+  <h1>NEXT.JS <em>SNIPPETS</em></h1>
+  <p>Type the prefix in any .js .jsx .ts .tsx file → press Tab → snippet expands.<br>
+  JS = JavaScript / JSX only · TS = TypeScript / TSX only · Both = works in all four file types.</p>
+</div>
+
+<!-- ═══ QUICK REFERENCE ═══ -->
+<section>
+  <div class="section-title">Quick Reference</div>
+  <table class="quick-table">
+    <thead>
+      <tr>
+        <th>Prefix</th>
+        <th>What it generates</th>
+        <th>Lang</th>
+        <th>When to use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>np→</td><td>Basic Next.js page component</td><td><span class="badge-js-inline">JS</span></td><td>Starting any new page</td></tr>
+      <tr><td>tsnp→</td><td>Typed Next.js page component</td><td><span class="badge-ts-inline">TS</span></td><td>Starting any new page in TypeScript</td></tr>
+      <tr><td>npsp→</td><td>Page + getStaticProps</td><td><span class="badge-js-inline">JS</span></td><td>Static page that fetches data at build time</td></tr>
+      <tr><td>tsnpsp→</td><td>Typed page + getStaticProps</td><td><span class="badge-ts-inline">TS</span></td><td>Typed static page with build-time data</td></tr>
+      <tr><td>npssp→</td><td>Page + getServerSideProps</td><td><span class="badge-js-inline">JS</span></td><td>Page that fetches fresh data on every request</td></tr>
+      <tr><td>tsnpssp→</td><td>Typed page + getServerSideProps</td><td><span class="badge-ts-inline">TS</span></td><td>Typed server-rendered page</td></tr>
+      <tr><td>sp→</td><td>getStaticProps function only</td><td><span class="badge-js-inline">JS</span></td><td>Adding static props to an existing page</td></tr>
+      <tr><td>tssp→</td><td>Typed getStaticProps only</td><td><span class="badge-ts-inline">TS</span></td><td>Adding typed static props to an existing page</td></tr>
+      <tr><td>spth→</td><td>getStaticPaths function</td><td><span class="badge-js-inline">JS</span></td><td>Dynamic routes like /projects/[slug]</td></tr>
+      <tr><td>tsspth→</td><td>Typed getStaticPaths</td><td><span class="badge-ts-inline">TS</span></td><td>Typed dynamic routes</td></tr>
+      <tr><td>ssp→</td><td>getServerSideProps function only</td><td><span class="badge-js-inline">JS</span></td><td>Adding SSR to an existing page</td></tr>
+      <tr><td>tsssp→</td><td>Typed getServerSideProps only</td><td><span class="badge-ts-inline">TS</span></td><td>Adding typed SSR to an existing page</td></tr>
+      <tr><td>capp→</td><td>Custom _app.js</td><td><span class="badge-js-inline">JS</span></td><td>Setting up global layout / providers</td></tr>
+      <tr><td>tscapp→</td><td>Typed custom _app.tsx</td><td><span class="badge-ts-inline">TS</span></td><td>Typed global app wrapper</td></tr>
+      <tr><td>cdoc→</td><td>Custom _document with getInitialProps</td><td><span class="badge-js-inline">JS</span></td><td>Customising the HTML document shell</td></tr>
+      <tr><td>cdocdom→</td><td>Custom _document with full DOM tree</td><td><span class="badge-js-inline">JS</span></td><td>Full control over Html, Head, body</td></tr>
+      <tr><td>impn→</td><td>Import from 'next'</td><td><span class="badge-both-inline">Both</span></td><td>Quickly importing Next.js modules</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══ IMPORTANT NOTE ═══ -->
+<div class="warn">
+  <div class="note-label">⚠ App Router vs Pages Router</div>
+  <p>These snippets use the <strong>Pages Router</strong> pattern (getStaticProps, getServerSideProps, _app, _document).<br>
+  Your portfolio uses the <strong>App Router</strong> — so most of these won't apply to your day-to-day work.<br>
+  The snippets still useful for you right now: <code>impn→</code>, <code>np→</code> / <code>tsnp→</code> as a quick component shell, and <code>spth→</code> / <code>tsspth→</code> for understanding the [slug] pattern conceptually.</p>
+</div>
+
+<!-- ═══ PAGE COMPONENTS ═══ -->
+<section>
+  <div class="section-title">01 — Page Components</div>
+
+  <div class="note">
+    <div class="note-label">What these do</div>
+    <p>Generate the basic shell of a Next.js page component so you don't have to type the boilerplate from scratch. Just type the prefix, hit Tab, and rename FileName to whatever your page is called.</p>
+  </div>
+
+  <div class="snippets">
+
+    <!-- np -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>np→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Basic Next.js Page</div>
+          <div class="snippet-desc">Generates a simple functional component with a default export. Starting point for any new page.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge js">JavaScript</span>
+        <span class="badge use">Use when: creating a new .jsx page from scratch</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">const</span> <span class="acc">FileName</span> = () => {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;&lt;/<span class="fn">div</span>&gt;
+}
+
+<span class="kw">export default</span> <span class="acc">FileName</span></pre>
+      </div>
+    </div>
+
+    <!-- tsnp -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>tsnp→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Typed Next.js Page</div>
+          <div class="snippet-desc">Same as np but typed with NextPage and an empty Props interface. Use this in your portfolio since you're using TypeScript.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge ts">TypeScript</span>
+        <span class="badge use">Use when: creating a new .tsx page — your default</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">import</span> { <span class="acc">NextPage</span> } <span class="kw">from</span> <span class="str">'next'</span>
+
+<span class="kw">interface</span> <span class="acc">Props</span> {}
+
+<span class="kw">const</span> <span class="acc">FileName</span>: <span class="acc">NextPage</span>&lt;<span class="acc">Props</span>&gt; = () => {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;&lt;/<span class="fn">div</span>&gt;
+}
+
+<span class="kw">export default</span> <span class="acc">FileName</span></pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ STATIC PROPS ═══ -->
+<section>
+  <div class="section-title">02 — Static Data (Build Time)</div>
+
+  <div class="note">
+    <div class="note-label">What getStaticProps does</div>
+    <p>Runs at <strong>build time</strong> — fetches data once when you deploy, not on every visit. Perfect for content that doesn't change often like your projects list or journal posts. Faster than server-side rendering because the HTML is pre-built.</p>
+  </div>
+
+  <div class="snippets">
+
+    <!-- sp -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>sp→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">getStaticProps — function only</div>
+          <div class="snippet-desc">Just the function — use this when you want to add static props to a page you've already written.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge js">JavaScript</span>
+        <span class="badge use">Use when: adding static data fetching to an existing page</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">export const</span> <span class="fn">getStaticProps</span> = <span class="kw">async</span> (context) => {
+  <span class="kw">return</span> {
+    <span class="prop">props</span>: {},
+  }
+}</pre>
+      </div>
+    </div>
+
+    <!-- tssp -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>tssp→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Typed getStaticProps — function only</div>
+          <div class="snippet-desc">Same as sp but with the GetStaticProps type from Next.js. TypeScript will catch any type mismatches in what you return.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge ts">TypeScript</span>
+        <span class="badge use">Use when: adding typed static props to an existing .tsx page</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">export const</span> <span class="fn">getStaticProps</span>: <span class="acc">GetStaticProps</span> = <span class="kw">async</span> (context) => {
+  <span class="kw">return</span> {
+    <span class="prop">props</span>: {},
+  }
+}</pre>
+      </div>
+    </div>
+
+    <!-- npsp -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>npsp→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Page + getStaticProps together</div>
+          <div class="snippet-desc">Full page component plus the getStaticProps function in one go. Use this when you know from the start your page needs build-time data.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge js">JavaScript</span>
+        <span class="badge use">Use when: starting a data-driven page from scratch</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">const</span> <span class="acc">FileName</span> = () => {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;&lt;/<span class="fn">div</span>&gt;
+}
+
+<span class="kw">export const</span> <span class="fn">getStaticProps</span> = <span class="kw">async</span> (context) => {
+  <span class="kw">return</span> {
+    <span class="prop">props</span>: {},
+  }
+}
+
+<span class="kw">export default</span> <span class="acc">FileName</span></pre>
+      </div>
+    </div>
+
+    <!-- tsnpsp -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>tsnpsp→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Typed Page + getStaticProps together</div>
+          <div class="snippet-desc">The TypeScript version of npsp. Typed page component plus typed static props. This is what you'll use for your projects and journal pages.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge ts">TypeScript</span>
+        <span class="badge use">Use when: starting a typed data-driven page — relevant for /projects</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">import</span> { <span class="acc">GetStaticProps</span>, <span class="acc">NextPage</span> } <span class="kw">from</span> <span class="str">'next'</span>
+
+<span class="kw">interface</span> <span class="acc">Props</span> {}
+
+<span class="kw">const</span> <span class="acc">FileName</span>: <span class="acc">NextPage</span>&lt;<span class="acc">Props</span>&gt; = () => {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;&lt;/<span class="fn">div</span>&gt;
+}
+
+<span class="kw">export const</span> <span class="fn">getStaticProps</span>: <span class="acc">GetStaticProps</span> = <span class="kw">async</span> (context) => {
+  <span class="kw">return</span> {
+    <span class="prop">props</span>: {},
+  }
+}
+
+<span class="kw">export default</span> <span class="acc">FileName</span></pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ STATIC PATHS ═══ -->
+<section>
+  <div class="section-title">03 — Dynamic Routes</div>
+
+  <div class="note">
+    <div class="note-label">What getStaticPaths does</div>
+    <p>Required whenever you have a dynamic route like <code>/projects/[slug]</code> or <code>/journal/[slug]</code>. It tells Next.js which slugs actually exist so it can pre-build those pages. You return an array of all valid paths — Next.js builds a page for each one.</p>
+  </div>
+
+  <div class="snippets">
+
+    <!-- spth -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>spth→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">getStaticPaths</div>
+          <div class="snippet-desc">Generates the function that defines which dynamic routes exist. The params object keys must match your folder name — so [slug] means params: { slug: 'your-value' }.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge js">JavaScript</span>
+        <span class="badge use">Use when: building /projects/[slug] or /journal/[slug]</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">export const</span> <span class="fn">getStaticPaths</span> = <span class="kw">async</span> () => {
+  <span class="kw">return</span> {
+    <span class="prop">paths</span>: [{ <span class="prop">params</span>: {} }],
+    <span class="prop">fallback</span>: <span class="num">true</span>,
+  }
+}</pre>
+      </div>
+    </div>
+
+    <!-- tsspth -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>tsspth→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Typed getStaticPaths</div>
+          <div class="snippet-desc">Same as spth but with the GetStaticPaths type applied. TypeScript will enforce the correct return shape.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge ts">TypeScript</span>
+        <span class="badge use">Use when: building typed dynamic routes — your main use case</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">export const</span> <span class="fn">getStaticPaths</span>: <span class="acc">GetStaticPaths</span> = <span class="kw">async</span> () => {
+  <span class="kw">return</span> {
+    <span class="prop">paths</span>: [{ <span class="prop">params</span>: {} }],
+    <span class="prop">fallback</span>: <span class="num">true</span>,
+  }
+}</pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ SERVER SIDE PROPS ═══ -->
+<section>
+  <div class="section-title">04 — Server-Side Rendering</div>
+
+  <div class="note">
+    <div class="note-label">What getServerSideProps does</div>
+    <p>Runs on the server on <strong>every single request</strong> — fetches fresh data each time someone visits the page. Slower than static but useful for data that changes constantly. For your portfolio you probably won't need this — your projects and journal content doesn't change per-visitor. But good to know it exists.</p>
+  </div>
+
+  <div class="snippets">
+
+    <!-- ssp -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>ssp→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">getServerSideProps — function only</div>
+          <div class="snippet-desc">Just the SSR function. Add this to a page when you need data that's different on every request.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge js">JavaScript</span>
+        <span class="badge use">Use when: the page needs fresh data on every visit</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">export const</span> <span class="fn">getServerSideProps</span> = <span class="kw">async</span> (context) => {
+  <span class="kw">return</span> {
+    <span class="prop">props</span>: {},
+  }
+}</pre>
+      </div>
+    </div>
+
+    <!-- tsssp -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>tsssp→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Typed getServerSideProps — function only</div>
+          <div class="snippet-desc">The typed version. Note the extra 's' — tsssp not tsssp. Three s's total. Easy to mix up.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge ts">TypeScript</span>
+        <span class="badge use">Use when: typed SSR on an existing page</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">export const</span> <span class="fn">getServerSideProps</span>: <span class="acc">GetServerSideProps</span> = <span class="kw">async</span> (context) => {
+  <span class="kw">return</span> {
+    <span class="prop">props</span>: {},
+  }
+}</pre>
+      </div>
+    </div>
+
+    <!-- npssp -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>npssp→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Page + getServerSideProps together</div>
+          <div class="snippet-desc">Full page component plus SSR function. Same as npsp but server-rendered instead of static.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge js">JavaScript</span>
+        <span class="badge use">Use when: starting a server-rendered page from scratch</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">const</span> <span class="acc">FileName</span> = () => {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;&lt;/<span class="fn">div</span>&gt;
+}
+
+<span class="kw">export const</span> <span class="fn">getServerSideProps</span> = <span class="kw">async</span> (context) => {
+  <span class="kw">return</span> {
+    <span class="prop">props</span>: {},
+  }
+}
+
+<span class="kw">export default</span> <span class="acc">FileName</span></pre>
+      </div>
+    </div>
+
+    <!-- tsnpssp -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>tsnpssp→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Typed Page + getServerSideProps together</div>
+          <div class="snippet-desc">The TypeScript version. Typed page component plus typed SSR function.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge ts">TypeScript</span>
+        <span class="badge use">Use when: typed server-rendered page from scratch</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">import</span> { <span class="acc">NextPage</span>, <span class="acc">GetServerSideProps</span> } <span class="kw">from</span> <span class="str">'next'</span>
+
+<span class="kw">interface</span> <span class="acc">Props</span> {}
+
+<span class="kw">const</span> <span class="acc">FileName</span>: <span class="acc">NextPage</span>&lt;<span class="acc">Props</span>&gt; = () => {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;&lt;/<span class="fn">div</span>&gt;
+}
+
+<span class="kw">export const</span> <span class="fn">getServerSideProps</span>: <span class="acc">GetServerSideProps</span> = (context) => {
+  <span class="kw">return</span> {
+    <span class="prop">props</span>: {},
+  }
+}
+
+<span class="kw">export default</span> <span class="acc">FileName</span></pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ APP & DOCUMENT ═══ -->
+<section>
+  <div class="section-title">05 — App & Document</div>
+
+  <div class="note">
+    <div class="note-label">What _app and _document are</div>
+    <p><code>_app</code> wraps every page — use it for global providers, layouts, and styles that apply everywhere (like your Navbar and theme toggle).<br>
+    <code>_document</code> is the HTML shell — the actual &lt;html&gt;, &lt;head&gt;, &lt;body&gt; tags. You only touch this if you need to add something to the HTML structure itself, like a custom font link or a lang attribute.</p>
+  </div>
+
+  <div class="snippets">
+
+    <!-- capp -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>capp→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Custom _app.js</div>
+          <div class="snippet-desc">The global app wrapper. Wrap Component with your providers here — theme context, Framer Motion AnimatePresence for page transitions, global layout.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge js">JavaScript</span>
+        <span class="badge use">Use when: setting up _app.js for global layout and providers</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">const</span> <span class="acc">MyApp</span> = ({ <span class="prop">Component</span>, <span class="prop">pageProps</span> }) => {
+  <span class="kw">return</span> &lt;<span class="acc">Component</span> {...<span class="prop">pageProps</span>} /&gt;
+}
+
+<span class="kw">export default</span> <span class="acc">MyApp</span></pre>
+      </div>
+    </div>
+
+    <!-- tscapp -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>tscapp→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Typed Custom _app.tsx</div>
+          <div class="snippet-desc">Same as capp but typed with AppProps. This is the version you'll use since your portfolio is TypeScript.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge ts">TypeScript</span>
+        <span class="badge use">Use when: setting up your typed _app.tsx — your version</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">import</span> { <span class="acc">AppProps</span> } <span class="kw">from</span> <span class="str">'next/app'</span>
+
+<span class="kw">const</span> <span class="acc">MyApp</span> = ({ <span class="prop">Component</span>, <span class="prop">pageProps</span> }: <span class="acc">AppProps</span>) => {
+  <span class="kw">return</span> &lt;<span class="acc">Component</span> {...<span class="prop">pageProps</span>} /&gt;
+}
+
+<span class="kw">export default</span> <span class="acc">MyApp</span></pre>
+      </div>
+    </div>
+
+    <!-- cdoc -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>cdoc→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Custom _document with getInitialProps</div>
+          <div class="snippet-desc">Minimal _document setup. Only use this if you actually need to customise the HTML document — most projects never touch it.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge js">JavaScript</span>
+        <span class="badge use">Use when: you need to modify the HTML document shell</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">import</span> <span class="acc">Document</span> <span class="kw">from</span> <span class="str">'next/document'</span>
+
+<span class="kw">class</span> <span class="acc">MyDocument</span> <span class="kw">extends</span> <span class="acc">Document</span> {
+  <span class="kw">static async</span> <span class="fn">getInitialProps</span>(ctx) {
+    <span class="kw">const</span> initialProps = <span class="kw">await</span> <span class="acc">Document</span>.<span class="fn">getInitialProps</span>(ctx)
+    <span class="kw">return</span> initialProps
+  }
+}
+
+<span class="kw">export default</span> <span class="acc">MyDocument</span></pre>
+      </div>
+    </div>
+
+    <!-- cdocdom -->
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>cdocdom→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Custom _document with full DOM tree</div>
+          <div class="snippet-desc">Full control — exposes the Html, Head, Main and NextScript elements. Use this when you need to add something directly to the HTML tag like lang attribute or a meta tag that must be in the document head.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge js">JavaScript</span>
+        <span class="badge use">Use when: you need full control over the HTML structure</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">import</span> <span class="acc">Document</span>, { <span class="acc">Html</span>, <span class="acc">Head</span>, <span class="acc">Main</span>, <span class="acc">NextScript</span> } <span class="kw">from</span> <span class="str">'next/document'</span>
+
+<span class="kw">class</span> <span class="acc">MyDocument</span> <span class="kw">extends</span> <span class="acc">Document</span> {
+  <span class="kw">static async</span> <span class="fn">getInitialProps</span>(ctx) {
+    <span class="kw">const</span> initialProps = <span class="kw">await</span> <span class="acc">Document</span>.<span class="fn">getInitialProps</span>(ctx)
+    <span class="kw">return</span> { ...initialProps }
+  }
+
+  <span class="fn">render</span>() {
+    <span class="kw">return</span> (
+      &lt;<span class="acc">Html</span>&gt;
+        &lt;<span class="acc">Head</span> /&gt;
+        &lt;<span class="fn">body</span>&gt;
+          &lt;<span class="acc">Main</span> /&gt;
+          &lt;<span class="acc">NextScript</span> /&gt;
+        &lt;/<span class="fn">body</span>&gt;
+      &lt;/<span class="acc">Html</span>&gt;
+    )
+  }
+}
+
+<span class="kw">export default</span> <span class="acc">MyDocument</span></pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ IMPORT ═══ -->
+<section>
+  <div class="section-title">06 — Imports</div>
+  <div class="snippets">
+    <div class="snippet-card">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>impn→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Import from 'next'</div>
+          <div class="snippet-desc">Quickly scaffolds a named import from the next package. Replace moduleName with whatever you need — Image, Link, useRouter, etc.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge js">JS</span>
+        <span class="badge ts">TS</span>
+        <span class="badge use">Use when: importing anything from next</span>
+      </div>
+      <div class="snippet-code">
+<pre><span class="kw">import</span> { <span class="acc">moduleName</span> } <span class="kw">from</span> <span class="str">'next'</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

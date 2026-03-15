@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Space_Mono, Inter } from "next/font/google";
 import "./globals.css";
+import NavBar from "@/components/nav-bar";
 
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
@@ -35,7 +36,10 @@ export default function RootLayout({
       lang="en"
       className={` ${bebasNeue.variable} ${spaceMono.variable} ${inter.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        <NavBar></NavBar>
+        {children}
+      </body>
     </html>
   );
 }
