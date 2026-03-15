@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Next.js Snippets — Clean Reference</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #141414;
+    --bg3: #1e1e1e;
+    --border: #2a2a2a;
+    --muted: #555;
+    --text-sub: #888;
+    --text: #f5f5f0;
+    --accent: #CAFF00;
+    --blue: #3b82f6;
+    --orange: #f5a623;
+    --purple: #7B2FBE;
+    --green: #4ade80;
+    --red: #ff5f5f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 48px 32px; max-width: 1100px; margin: 0 auto; }
+
+  .doc-header { border-bottom: 2px solid var(--accent); padding-bottom: 28px; margin-bottom: 56px; }
+  .doc-header-meta { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+  .doc-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 72px); letter-spacing: 4px; line-height: 1; }
+  .doc-header h1 em { color: var(--accent); font-style: normal; }
+  .doc-header p { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-sub); margin-top: 10px; letter-spacing: 1px; line-height: 1.8; }
+
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 3px; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  section { margin-bottom: 64px; }
+
+  /* RELEVANCE PILL */
+  .relevance {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .relevance.yours { background: #0a2200; border: 1px solid var(--accent); color: var(--accent); }
+  .relevance.good  { background: #001e3c; border: 1px solid var(--blue); color: var(--blue); }
+  .relevance.skip  { background: #1a1a1a; border: 1px solid var(--muted); color: var(--muted); }
+  .relevance.deprecated { background: #2a0000; border: 1px solid var(--red); color: var(--red); }
+
+  /* NOTE / WARN */
+  .note { border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 14px 16px; border-radius: 2px; background: var(--bg2); margin-bottom: 20px; }
+  .warn { border: 1px solid var(--orange); border-left: 3px solid var(--orange); padding: 14px 16px; border-radius: 2px; background: #3b2e0015; margin-bottom: 20px; }
+  .info { border: 1px solid var(--blue); border-left: 3px solid var(--blue); padding: 14px 16px; border-radius: 2px; background: #001e3c22; margin-bottom: 20px; }
+  .note-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; color: var(--accent); }
+  .warn .note-label { color: var(--orange); }
+  .info .note-label { color: var(--blue); }
+  .note p, .warn p, .info p { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-sub); letter-spacing: 0.5px; line-height: 1.8; }
+
+  /* SNIPPET CARD */
+  .snippets { display: flex; flex-direction: column; gap: 14px; }
+  .snippet-card { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; background: var(--bg2); }
+  .snippet-card.yours { border-color: #2a3d00; }
+  .snippet-card.deprecated { opacity: 0.5; }
+
+  .snippet-header { display: grid; grid-template-columns: 140px 1fr; align-items: stretch; border-bottom: 1px solid var(--border); }
+  .snippet-prefix { background: var(--bg3); border-right: 1px solid var(--border); padding: 14px 16px; display: flex; align-items: center; justify-content: center; }
+  .snippet-prefix code { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: var(--accent); background: none; border: none; padding: 0; letter-spacing: 1px; }
+  .snippet-card.deprecated .snippet-prefix code { color: var(--red); }
+
+  .snippet-meta { padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+  .snippet-title { font-size: 14px; font-weight: 600; color: var(--text); }
+  .snippet-desc { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--text-sub); letter-spacing: 0.5px; line-height: 1.6; }
+
+  .snippet-badges { padding: 7px 14px; display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--border); background: var(--bg3); align-items: center; }
+  .badge { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; }
+  .badge.yours  { background: #0a2200; border: 1px solid var(--accent); color: var(--accent); }
+  .badge.js     { background: #3b2e00; border: 1px solid var(--orange); color: var(--orange); }
+  .badge.ts     { background: #001e3c; border: 1px solid var(--blue); color: var(--blue); }
+  .badge.both   { background: #1a1a2e; border: 1px solid var(--purple); color: var(--purple); }
+  .badge.use    { background: var(--bg); border: 1px solid var(--border); color: var(--text-sub); }
+  .badge.dep    { background: #2a0000; border: 1px solid var(--red); color: var(--red); }
+
+  .snippet-tabs { display: flex; border-bottom: 1px solid var(--border); }
+  .tab-btn { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; padding: 7px 14px; background: none; border: none; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn:hover { color: var(--text); }
+
+  .snippet-code { padding: 16px; overflow-x: auto; display: none; }
+  .snippet-code.active { display: block; }
+  pre { font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.8; color: var(--text-sub); white-space: pre; }
+
+  /* syntax */
+  .kw   { color: #c792ea; }
+  .fn   { color: #82aaff; }
+  .str  { color: #c3e88d; }
+  .cm   { color: #546e7a; font-style: italic; }
+  .acc  { color: var(--accent); }
+  .num  { color: #f78c6c; }
+  .prop { color: #f07178; }
+  .dir  { color: var(--orange); }
+
+  code { font-family: 'Space Mono', monospace; background: var(--bg3); border: 1px solid var(--border); color: var(--accent); font-size: 11px; padding: 1px 6px; border-radius: 2px; }
+
+  /* QUICK REF TABLE */
+  .quick-table { width: 100%; border-collapse: collapse; font-family: 'Space Mono', monospace; font-size: 11px; }
+  .quick-table th { background: var(--bg3); color: var(--accent); letter-spacing: 2px; text-transform: uppercase; font-size: 9px; padding: 10px 14px; text-align: left; border: 1px solid var(--border); }
+  .quick-table td { padding: 10px 14px; border: 1px solid var(--border); color: var(--text-sub); vertical-align: top; line-height: 1.5; }
+  .quick-table tr:hover td { background: var(--bg2); }
+  .quick-table td:first-child { color: var(--accent); font-weight: 700; white-space: nowrap; }
+  .quick-table td:nth-child(2) { color: var(--text); }
+  .dot-yours  { color: var(--accent); }
+  .dot-good   { color: var(--blue); }
+  .dot-skip   { color: var(--muted); }
+  .dot-dep    { color: var(--red); }
+</style>
+
+<script>
+  function switchTab(cardId, lang) {
+    document.querySelectorAll(`#${cardId} .snippet-code`).forEach(el => el.classList.remove('active'));
+    document.querySelectorAll(`#${cardId} .tab-btn`).forEach(el => el.classList.remove('active'));
+    document.querySelector(`#${cardId} .snippet-code.${lang}`).classList.add('active');
+    document.querySelector(`#${cardId} .tab-btn[data-lang="${lang}"]`).classList.add('active');
+  }
+</script>
+</head>
+<body>
+
+<div class="doc-header">
+  <div class="doc-header-meta">VSCode Extension · Reference Guide v2</div>
+  <h1>NEXT.JS <em>SNIPPETS</em></h1>
+  <p>
+    Type prefix → press Tab → snippet expands.<br>
+    <span style="color:var(--accent)">■</span> Use in your portfolio &nbsp;
+    <span style="color:var(--blue)">■</span> Good to know &nbsp;
+    <span style="color:var(--muted)">■</span> Skip for now &nbsp;
+    <span style="color:var(--red)">■</span> Deprecated — don't use
+  </p>
+</div>
+
+<!-- QUICK REF -->
+<section>
+  <div class="section-title">Quick Reference</div>
+  <table class="quick-table">
+    <thead>
+      <tr><th>Prefix</th><th>What it generates</th><th>Relevance</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>narootlayout→</td><td>Root layout (app/layout.tsx)</td><td><span class="dot-yours">● Your portfolio</span></td></tr>
+      <tr><td>napage→</td><td>App Router page component</td><td><span class="dot-yours">● Your portfolio</span></td></tr>
+      <tr><td>naerror→</td><td>Error boundary page</td><td><span class="dot-yours">● Your portfolio</span></td></tr>
+      <tr><td>naloading→</td><td>Loading UI page</td><td><span class="dot-yours">● Your portfolio</span></td></tr>
+      <tr><td>nrget→</td><td>Route handler — GET request</td><td><span class="dot-yours">● Your portfolio (contact form)</span></td></tr>
+      <tr><td>nrpost→</td><td>Route handler — POST request</td><td><span class="dot-yours">● Your portfolio (contact form)</span></td></tr>
+      <tr><td>nfe→</td><td>Named function component, export at end</td><td><span class="dot-yours">● Your portfolio</span></td></tr>
+      <tr><td>nf→</td><td>Anonymous function component, inline export</td><td><span class="dot-yours">● Your portfolio</span></td></tr>
+      <tr><td>nil→</td><td>Next.js Link component</td><td><span class="dot-yours">● Your portfolio</span></td></tr>
+      <tr><td>nul→</td><td>Next.js Image component</td><td><span class="dot-yours">● Your portfolio</span></td></tr>
+      <tr><td>niur→</td><td>Import useRouter</td><td><span class="dot-yours">● Your portfolio</span></td></tr>
+      <tr><td>nalayout→</td><td>Nested layout component</td><td><span class="dot-good">● Good to know</span></td></tr>
+      <tr><td>natemplate→</td><td>Template component (re-renders on nav)</td><td><span class="dot-good">● Good to know</span></td></tr>
+      <tr><td>naglobalerror→</td><td>Global error boundary</td><td><span class="dot-good">● Good to know</span></td></tr>
+      <tr><td>nnotfound→</td><td>404 not found page</td><td><span class="dot-good">● Good to know</span></td></tr>
+      <tr><td>ncdocument→</td><td>Custom _document</td><td><span class="dot-good">● Good to know</span></td></tr>
+      <tr><td>nrput→</td><td>Route handler — PUT request</td><td><span class="dot-skip">● Skip for now</span></td></tr>
+      <tr><td>nrpatch→</td><td>Route handler — PATCH request</td><td><span class="dot-skip">● Skip for now</span></td></tr>
+      <tr><td>nrdelete→</td><td>Route handler — DELETE request</td><td><span class="dot-skip">● Skip for now</span></td></tr>
+      <tr><td>nspage→</td><td>Page + getServerSideProps</td><td><span class="dot-skip">● Pages Router — skip</span></td></tr>
+      <tr><td>nstaticpage→</td><td>Page + getStaticProps + getStaticPaths</td><td><span class="dot-skip">● Pages Router — skip</span></td></tr>
+      <tr><td>nafe→</td><td>Arrow function, export at end</td><td><span class="dot-skip">● Skip — use nfe instead</span></td></tr>
+      <tr><td>naf→</td><td>Anonymous arrow function</td><td><span class="dot-skip">● Skip — use nf instead</span></td></tr>
+      <tr><td>ntsfwserver→</td><td>TS function + getServerSideProps</td><td><span class="dot-dep">● Deprecated</span></td></tr>
+      <tr><td>ntsfwstatic→</td><td>TS function + getStaticProps</td><td><span class="dot-dep">● Deprecated</span></td></tr>
+      <tr><td>ntsapi→</td><td>TS API route (old pattern)</td><td><span class="dot-dep">● Deprecated</span></td></tr>
+      <tr><td>ntscdocument→</td><td>TS custom document (class-based)</td><td><span class="dot-dep">● Deprecated</span></td></tr>
+      <tr><td>!!tsstatic→</td><td>TS static generation (old pattern)</td><td><span class="dot-dep">● Deprecated</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- APP ROUTER -->
+<section>
+  <div class="section-title">01 — App Router (Your World)</div>
+  <div class="note">
+    <div class="note-label">These are the ones that matter most for your portfolio</div>
+    <p>These snippets are built for the <strong>App Router</strong> — the architecture your portfolio uses. Learn these first, use them daily. The narootlayout one alone will save you a lot of typing.</p>
+  </div>
+
+  <div class="snippets">
+
+    <!-- narootlayout -->
+    <div class="snippet-card yours" id="c1">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>narootlayout→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Root Layout</div>
+          <div class="snippet-desc">The shell that wraps your entire app. Lives at app/layout.tsx. This is where your Navbar, Footer and global providers go. You only write this once.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge yours">Your portfolio</span>
+        <span class="badge use">app/layout.tsx — written once, wraps everything</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="ts" onclick="switchTab('c1','ts')">TypeScript</button>
+        <button class="tab-btn" data-lang="js" onclick="switchTab('c1','js')">JavaScript</button>
+      </div>
+      <div class="snippet-code ts active">
+<pre><span class="kw">export default function</span> <span class="fn">RootLayout</span>({
+  children,
+}: {
+  children: React.<span class="acc">ReactNode</span>;
+}) {
+  <span class="kw">return</span> (
+    &lt;<span class="fn">html</span> lang=<span class="str">"en"</span>&gt;
+      &lt;<span class="fn">body</span>&gt;
+        &lt;<span class="fn">main</span>&gt;{children}&lt;/<span class="fn">main</span>&gt;
+      &lt;/<span class="fn">body</span>&gt;
+    &lt;/<span class="fn">html</span>&gt;
+  );
+}</pre>
+      </div>
+      <div class="snippet-code js">
+<pre><span class="kw">export default function</span> <span class="fn">RootLayout</span>({ children }) {
+  <span class="kw">return</span> (
+    &lt;<span class="fn">html</span> lang=<span class="str">"en"</span>&gt;
+      &lt;<span class="fn">body</span>&gt;
+        &lt;<span class="fn">main</span>&gt;{children}&lt;/<span class="fn">main</span>&gt;
+      &lt;/<span class="fn">body</span>&gt;
+    &lt;/<span class="fn">html</span>&gt;
+  );
+}</pre>
+      </div>
+    </div>
+
+    <!-- napage -->
+    <div class="snippet-card yours" id="c2">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>napage→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">App Router Page</div>
+          <div class="snippet-desc">Your go-to snippet for creating any new page in the App Router. Use this for app/page.tsx, app/about/page.tsx, app/projects/page.tsx — every page file.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge yours">Your portfolio</span>
+        <span class="badge both">JS + TS</span>
+        <span class="badge use">Use for every new page file you create</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="both" onclick="switchTab('c2','both')">JS + TS (same)</button>
+      </div>
+      <div class="snippet-code both active">
+<pre><span class="kw">export default function</span> <span class="fn">Page</span>() {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;&lt;/<span class="fn">div</span>&gt;;
+}</pre>
+      </div>
+    </div>
+
+    <!-- naloading -->
+    <div class="snippet-card yours" id="c3">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>naloading→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Loading UI</div>
+          <div class="snippet-desc">A special file Next.js automatically shows while a page is loading. Create a loading.tsx next to any page.tsx and it becomes the skeleton/spinner for that route. Free streaming with zero extra code.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge yours">Your portfolio</span>
+        <span class="badge both">JS + TS</span>
+        <span class="badge use">Add loading.tsx next to any page — instant loading state</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="both" onclick="switchTab('c3','both')">JS + TS (same)</button>
+      </div>
+      <div class="snippet-code both active">
+<pre><span class="kw">export default function</span> <span class="fn">Loading</span>() {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;Loading...&lt;/<span class="fn">div</span>&gt;;
+}</pre>
+      </div>
+    </div>
+
+    <!-- naerror -->
+    <div class="snippet-card yours" id="c4">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>naerror→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Error Boundary</div>
+          <div class="snippet-desc">A special file Next.js shows if a page crashes. Must be a Client Component because it uses browser-side error catching. The reset function lets the user try again without a full page reload.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge yours">Your portfolio</span>
+        <span class="badge use">Create error.tsx next to any page — automatic error handling</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="ts" onclick="switchTab('c4','ts')">TypeScript</button>
+        <button class="tab-btn" data-lang="js" onclick="switchTab('c4','js')">JavaScript</button>
+      </div>
+      <div class="snippet-code ts active">
+<pre><span class="dir">"use client"</span>;
+<span class="kw">import</span> { useEffect } <span class="kw">from</span> <span class="str">"react"</span>;
+
+<span class="kw">export default function</span> <span class="fn">Error</span>({
+  error,
+  reset,
+}: {
+  error: <span class="acc">Error</span> & { digest?: <span class="acc">string</span> };
+  reset: () => <span class="acc">void</span>;
+}) {
+  <span class="fn">useEffect</span>(() => {
+    console.<span class="fn">error</span>(error);
+  }, [error]);
+
+  <span class="kw">return</span> (
+    &lt;<span class="fn">div</span>&gt;
+      &lt;<span class="fn">h2</span>&gt;Something went wrong!&lt;/<span class="fn">h2</span>&gt;
+      &lt;<span class="fn">button</span> onClick={reset}&gt;Try again&lt;/<span class="fn">button</span>&gt;
+    &lt;/<span class="fn">div</span>&gt;
+  );
+}</pre>
+      </div>
+      <div class="snippet-code js">
+<pre><span class="dir">"use client"</span>;
+<span class="kw">import</span> { useEffect } <span class="kw">from</span> <span class="str">"react"</span>;
+
+<span class="kw">export default function</span> <span class="fn">Error</span>({ error, reset }) {
+  <span class="fn">useEffect</span>(() => {
+    console.<span class="fn">error</span>(error);
+  }, [error]);
+
+  <span class="kw">return</span> (
+    &lt;<span class="fn">div</span>&gt;
+      &lt;<span class="fn">h2</span>&gt;Something went wrong!&lt;/<span class="fn">h2</span>&gt;
+      &lt;<span class="fn">button</span> onClick={reset}&gt;Try again&lt;/<span class="fn">button</span>&gt;
+    &lt;/<span class="fn">div</span>&gt;
+  );
+}</pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE INIT -->
+<section>
+  <div class="section-title">02 — Component Shells (Use These Daily)</div>
+  <div class="note">
+    <div class="note-label">Your two go-to component starters</div>
+    <p>These are the function declaration style you said you prefer. Use <code>nfe→</code> when you want to name the component and export it at the bottom. Use <code>nf→</code> for a quick inline export. Both are identical in behavior.</p>
+  </div>
+
+  <div class="snippets">
+
+    <!-- nfe -->
+    <div class="snippet-card yours" id="c5">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>nfe→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Named Function — Export at End</div>
+          <div class="snippet-desc">Function declaration with the export default at the bottom. Good for components where you want to see the name clearly separated from the export.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge yours">Your portfolio</span>
+        <span class="badge both">JS + TS</span>
+        <span class="badge use">Use for most components — rename FileName to your component name</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="both" onclick="switchTab('c5','both')">JS + TS (same)</button>
+      </div>
+      <div class="snippet-code both active">
+<pre><span class="kw">function</span> <span class="fn">FileName</span>() {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;CONTENT&lt;/<span class="fn">div</span>&gt;;
+}
+
+<span class="kw">export default</span> <span class="acc">FileName</span>;</pre>
+      </div>
+    </div>
+
+    <!-- nf -->
+    <div class="snippet-card yours" id="c6">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>nf→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Anonymous Function — Inline Export</div>
+          <div class="snippet-desc">Quickest possible component shell. The export default is inline so there's no separate export line at the bottom. Fine for simple, small components.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge yours">Your portfolio</span>
+        <span class="badge both">JS + TS</span>
+        <span class="badge use">Use for quick small components</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="both" onclick="switchTab('c6','both')">JS + TS (same)</button>
+      </div>
+      <div class="snippet-code both active">
+<pre><span class="kw">export default function</span> () {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;CONTENT&lt;/<span class="fn">div</span>&gt;;
+}</pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ROUTE HANDLERS -->
+<section>
+  <div class="section-title">03 — Route Handlers (API Endpoints)</div>
+  <div class="note">
+    <div class="note-label">What route handlers are</div>
+    <p>These replace the old <code>pages/api/</code> pattern. You create a <code>route.ts</code> file inside any folder in <code>app/</code> and export functions named GET, POST, etc. You'll use these for your contact form — the form submits a POST request, your route handler receives it and sends the email.</p>
+  </div>
+
+  <div class="snippets">
+
+    <!-- nrget -->
+    <div class="snippet-card yours" id="c7">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>nrget→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Route Handler — GET</div>
+          <div class="snippet-desc">Handles GET requests to that route. Use when you need to read or fetch data from an endpoint. Lives in app/any-folder/route.ts.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge yours">Your portfolio</span>
+        <span class="badge use">app/api/contact/route.ts — for fetching data</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="ts" onclick="switchTab('c7','ts')">TypeScript</button>
+        <button class="tab-btn" data-lang="js" onclick="switchTab('c7','js')">JavaScript</button>
+      </div>
+      <div class="snippet-code ts active">
+<pre><span class="kw">export async function</span> <span class="fn">GET</span>(request: <span class="acc">Request</span>) {}</pre>
+      </div>
+      <div class="snippet-code js">
+<pre><span class="kw">export async function</span> <span class="fn">GET</span>(request) {}</pre>
+      </div>
+    </div>
+
+    <!-- nrpost -->
+    <div class="snippet-card yours" id="c8">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>nrpost→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Route Handler — POST</div>
+          <div class="snippet-desc">Handles POST requests. This is the one you'll use for your contact form — the form sends a POST with the message data, this function receives it.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge yours">Your portfolio</span>
+        <span class="badge use">Contact form submission — your main use case</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="ts" onclick="switchTab('c8','ts')">TypeScript</button>
+        <button class="tab-btn" data-lang="js" onclick="switchTab('c8','js')">JavaScript</button>
+      </div>
+      <div class="snippet-code ts active">
+<pre><span class="kw">export async function</span> <span class="fn">POST</span>(request: <span class="acc">Request</span>) {}</pre>
+      </div>
+      <div class="snippet-code js">
+<pre><span class="kw">export async function</span> <span class="fn">POST</span>(request) {}</pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- IMPORTING COMPONENTS -->
+<section>
+  <div class="section-title">04 — Imports & Usage</div>
+  <div class="note">
+    <div class="note-label">These save the most keystrokes</div>
+    <p>You'll type these constantly. <code>nil→</code> and <code>nul→</code> especially — Next.js Link and Image are used on nearly every page.</p>
+  </div>
+
+  <div class="snippets">
+
+    <!-- nil -->
+    <div class="snippet-card yours" id="c9">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>nil→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Import Next.js Link</div>
+          <div class="snippet-desc">Imports the Link component from next/link. Always use this instead of a plain &lt;a&gt; tag for internal navigation — it prefetches pages and makes the site feel instant.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge yours">Your portfolio</span>
+        <span class="badge both">JS + TS</span>
+        <span class="badge use">Any time you link to another page on your site</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="both" onclick="switchTab('c9','both')">JS + TS (same)</button>
+      </div>
+      <div class="snippet-code both active">
+<pre><span class="kw">import</span> <span class="acc">Link</span> <span class="kw">from</span> <span class="str">"next/link"</span>;</pre>
+      </div>
+    </div>
+
+    <!-- nul image -->
+    <div class="snippet-card yours" id="c10">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>nul→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Next.js Image Component</div>
+          <div class="snippet-desc">The Next.js Image component with src, width, height and alt. Always use this over a plain &lt;img&gt; tag — it automatically optimises images, lazy loads them, and prevents layout shift.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge yours">Your portfolio</span>
+        <span class="badge both">JS + TS</span>
+        <span class="badge use">Profile photo, project screenshots — any image on the site</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="both" onclick="switchTab('c10','both')">JS + TS (same)</button>
+      </div>
+      <div class="snippet-code both active">
+<pre>&lt;<span class="acc">Image</span> src=<span class="str">"path"</span> width=<span class="str">"width"</span> height=<span class="str">"height"</span> alt=<span class="str">"alt"</span> /&gt;</pre>
+      </div>
+    </div>
+
+    <!-- niur -->
+    <div class="snippet-card yours" id="c11">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>niur→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Import useRouter</div>
+          <div class="snippet-desc">Imports the useRouter hook. Lets you programmatically navigate between pages — useful for redirecting after form submission or reading the current route in a component.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge yours">Your portfolio</span>
+        <span class="badge both">JS + TS</span>
+        <span class="badge use">When you need to navigate programmatically — e.g. after form submit</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="both" onclick="switchTab('c11','both')">JS + TS (same)</button>
+      </div>
+      <div class="snippet-code both active">
+<pre><span class="kw">import</span> { <span class="fn">useRouter</span> } <span class="kw">from</span> <span class="str">"next/router"</span>;</pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GOOD TO KNOW -->
+<section>
+  <div class="section-title">05 — Good to Know</div>
+  <div class="info">
+    <div class="note-label">Not needed right now — but worth understanding</div>
+    <p>These won't come up in your day-to-day portfolio build but knowing what they do makes you a more complete Next.js developer. Read through them once, come back when you need them.</p>
+  </div>
+
+  <div class="snippets">
+
+    <!-- nalayout -->
+    <div class="snippet-card" id="c12">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>nalayout→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Nested Layout</div>
+          <div class="snippet-desc">A layout that only wraps a specific section of the app. If you add a layout.tsx inside app/projects/, everything under /projects shares that layout. Useful if your projects section needs a sidebar or different header.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge good" style="background:#001e3c;border:1px solid var(--blue);color:var(--blue)">Good to know</span>
+        <span class="badge use">app/projects/layout.tsx — section-specific layout</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="ts" onclick="switchTab('c12','ts')">TypeScript</button>
+        <button class="tab-btn" data-lang="js" onclick="switchTab('c12','js')">JavaScript</button>
+      </div>
+      <div class="snippet-code ts active">
+<pre><span class="kw">export default function</span> <span class="fn">Layout</span>({ children }: { children: React.<span class="acc">ReactNode</span> }) {
+  <span class="kw">return</span> &lt;<span class="fn">section</span>&gt;{children}&lt;/<span class="fn">section</span>&gt;;
+}</pre>
+      </div>
+      <div class="snippet-code js">
+<pre><span class="kw">export default function</span> <span class="fn">Layout</span>({ children }) {
+  <span class="kw">return</span> &lt;<span class="fn">section</span>&gt;{children}&lt;/<span class="fn">section</span>&gt;;
+}</pre>
+      </div>
+    </div>
+
+    <!-- natemplate -->
+    <div class="snippet-card" id="c13">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>natemplate→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">Template</div>
+          <div class="snippet-desc">Like a layout but it re-renders on every navigation. Layouts persist and don't re-render — templates do. Use a template when you need animations to replay every time a user visits a route.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge good" style="background:#001e3c;border:1px solid var(--blue);color:var(--blue)">Good to know</span>
+        <span class="badge use">When you need page enter animations to replay on every visit</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="ts" onclick="switchTab('c13','ts')">TypeScript</button>
+        <button class="tab-btn" data-lang="js" onclick="switchTab('c13','js')">JavaScript</button>
+      </div>
+      <div class="snippet-code ts active">
+<pre><span class="kw">export default function</span> <span class="fn">Template</span>({ children }: { children: React.<span class="acc">ReactNode</span> }) {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;{children}&lt;/<span class="fn">div</span>&gt;;
+}</pre>
+      </div>
+      <div class="snippet-code js">
+<pre><span class="kw">export default function</span> <span class="fn">Template</span>({ children }) {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;{children}&lt;/<span class="fn">div</span>&gt;;
+}</pre>
+      </div>
+    </div>
+
+    <!-- nnotfound -->
+    <div class="snippet-card" id="c14">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>nnotfound→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">404 Not Found Page</div>
+          <div class="snippet-desc">A custom 404 page. Name the file not-found.tsx and Next.js automatically serves it when a route doesn't exist. Great opportunity to add personality — make yours match your site's aesthetic.</div>
+        </div>
+      </div>
+      <div class="snippet-badges">
+        <span class="badge good" style="background:#001e3c;border:1px solid var(--blue);color:var(--blue)">Good to know</span>
+        <span class="badge use">app/not-found.tsx — shown on any 404</span>
+      </div>
+      <div class="snippet-tabs">
+        <button class="tab-btn active" data-lang="both" onclick="switchTab('c14','both')">JS + TS (same)</button>
+      </div>
+      <div class="snippet-code both active">
+<pre><span class="kw">export default function</span> <span class="fn">NotFound</span>() {
+  <span class="kw">return</span> (
+    &lt;<span class="fn">div</span>&gt;
+      &lt;<span class="fn">h1</span>&gt;Page Not Found&lt;/<span class="fn">h1</span>&gt;
+    &lt;/<span class="fn">div</span>&gt;
+  );
+}</pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DEPRECATED -->
+<section>
+  <div class="section-title">06 — Deprecated — Don't Use</div>
+  <div class="warn">
+    <div class="note-label">⚠ Old patterns — skip these entirely</div>
+    <p>These snippets generate code from the old Pages Router era or use class-based patterns that are no longer recommended. The extension still includes them for backwards compatibility with older projects. For your portfolio — ignore them completely.</p>
+  </div>
+
+  <div class="snippets">
+    <div class="snippet-card deprecated" id="c15">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>ntsfwserver→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">TS Function + getServerSideProps</div>
+          <div class="snippet-desc">Pages Router pattern — getServerSideProps doesn't exist in the App Router. Don't use.</div>
+        </div>
+      </div>
+      <div class="snippet-badges"><span class="badge dep">Deprecated</span><span class="badge use">Pages Router only — not for your project</span></div>
+      <div class="snippet-tabs"><button class="tab-btn active" data-lang="both" onclick="switchTab('c15','both')">TypeScript</button></div>
+      <div class="snippet-code both active">
+<pre><span class="cm">// ❌ Don't use — Pages Router pattern only</span>
+<span class="kw">import</span> { <span class="acc">GetServerSideProps</span> } <span class="kw">from</span> <span class="str">"next"</span>;
+
+<span class="kw">const</span> <span class="acc">FileName</span> = () => {
+  <span class="kw">return</span> &lt;<span class="fn">div</span>&gt;CONTENT&lt;/<span class="fn">div</span>&gt;;
+};
+
+<span class="kw">export const</span> <span class="fn">getServerSideProps</span>: <span class="acc">GetServerSideProps</span> = <span class="kw">async</span> (ctx) => {
+  <span class="kw">return</span> { <span class="prop">props</span>: { <span class="prop">data</span>: <span class="num">null</span> } };
+};
+
+<span class="kw">export default</span> <span class="acc">FileName</span>;</pre>
+      </div>
+    </div>
+
+    <div class="snippet-card deprecated" id="c16">
+      <div class="snippet-header">
+        <div class="snippet-prefix"><code>ntscdocument→</code></div>
+        <div class="snippet-meta">
+          <div class="snippet-title">TS Custom Document (Class-based)</div>
+          <div class="snippet-desc">The old class-based _document pattern. Replaced by the root layout in the App Router. Don't use.</div>
+        </div>
+      </div>
+      <div class="snippet-badges"><span class="badge dep">Deprecated</span><span class="badge use">Use narootlayout instead</span></div>
+      <div class="snippet-tabs"><button class="tab-btn active" data-lang="both" onclick="switchTab('c16','both')">TypeScript</button></div>
+      <div class="snippet-code both active">
+<pre><span class="cm">// ❌ Don't use — replaced by narootlayout in App Router</span>
+<span class="kw">import</span> <span class="acc">Document</span>, { <span class="acc">Html</span>, <span class="acc">Head</span>, <span class="acc">Main</span>, <span class="acc">NextScript</span> } <span class="kw">from</span> <span class="str">"next/document"</span>;
+
+<span class="kw">class</span> <span class="acc">MyDocument</span> <span class="kw">extends</span> <span class="acc">Document</span> {
+  <span class="kw">static async</span> <span class="fn">getInitialProps</span>(ctx) { ... }
+  <span class="fn">render</span>() { ... }
+}
+
+<span class="kw">export default</span> <span class="acc">MyDocument</span>;</pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>

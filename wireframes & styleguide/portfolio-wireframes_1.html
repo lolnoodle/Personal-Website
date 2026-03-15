@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio – Sitemap & Wireframes v2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f5f0;
+    --accent: #CAFF00;
+    --gray: #1a1a1a;
+    --gray2: #2a2a2a;
+    --muted: #555;
+    --border: #333;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    padding: 48px 32px;
+  }
+
+  .doc-header {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 24px;
+    margin-bottom: 60px;
+  }
+  .doc-header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 80px);
+    letter-spacing: 4px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .doc-header h1 span { color: var(--accent); }
+  .doc-header p {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  section { margin-bottom: 80px; }
+
+  /* SITEMAP */
+  .sitemap { display: flex; flex-direction: column; align-items: center; }
+  .sm-root { background: var(--accent); color: var(--black); font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; padding: 14px 40px; border-radius: 2px; }
+  .sm-connector-v { width: 2px; height: 40px; background: var(--border); }
+  .sm-h-line { display: flex; align-items: flex-start; position: relative; width: 100%; justify-content: center; }
+  .sm-h-line::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 82%; height: 2px; background: var(--border); }
+  .sm-col { display: flex; flex-direction: column; align-items: center; flex: 1; max-width: 160px; }
+  .sm-col-connector { width: 2px; height: 32px; background: var(--border); }
+  .sm-node { background: var(--gray); border: 1px solid var(--border); font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 10px 16px; text-align: center; color: var(--white); width: 100%; border-radius: 2px; }
+  .sm-sub-connector { width: 2px; height: 20px; background: var(--border); }
+  .sm-sub { background: transparent; border: 1px solid var(--border); font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); padding: 7px 12px; text-align: center; width: 100%; border-radius: 2px; letter-spacing: 0.5px; }
+
+  /* WIREFRAME CARDS */
+  .wf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); gap: 40px; }
+  .wf-card { border: 1px solid var(--border); background: var(--gray); border-radius: 4px; overflow: hidden; }
+  .wf-card-header { background: var(--gray2); padding: 12px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+  .wf-card-header span { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
+  .wf-card-header .page-note { margin-left: auto; font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 1px; }
+  .wf-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+  .wf-dot.accent { background: var(--accent); }
+  .wf-body { padding: 20px; }
+
+  .wf-navbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border: 1px solid var(--accent); margin-bottom: 22px; border-radius: 2px; position: relative; }
+  .wf-navbar-note { position: absolute; top: -18px; left: 0; font-family: 'Space Mono', monospace; font-size: 8px; color: var(--accent); letter-spacing: 1px; }
+  .wf-initials { width: 32px; height: 32px; border: 1px solid var(--accent); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 14px; color: var(--accent); letter-spacing: 1px; }
+  .wf-nav-links { display: flex; gap: 8px; align-items: center; }
+  .wf-nav-link { width: 44px; height: 10px; background: var(--border); border-radius: 1px; }
+  .wf-nav-link.active { background: transparent; border-bottom: 1px solid var(--accent); height: 12px; }
+
+  .wf-hero { border: 1px solid var(--border); padding: 24px; margin-bottom: 12px; border-radius: 2px; position: relative; overflow: hidden; }
+  .wf-corner-tag { position: absolute; top: 8px; right: 10px; font-family: 'Space Mono', monospace; font-size: 8px; color: var(--muted); letter-spacing: 1px; }
+  .wf-anim-tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 8px; color: var(--black); background: var(--accent); padding: 2px 6px; border-radius: 1px; letter-spacing: 1px; margin-bottom: 8px; }
+  .wf-name-block { width: 95%; height: 52px; background: var(--white); opacity: 0.95; margin-bottom: 4px; border-radius: 1px; position: relative; }
+  .wf-name-block::after { content: 'YOUR NAME — stagger in on load'; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-family: 'Space Mono', monospace; font-size: 7px; color: var(--black); opacity: 0.4; letter-spacing: 1px; }
+
+  .wf-rotating-text { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .wf-rotate-label { font-family: 'Space Mono', monospace; font-size: 8px; color: var(--muted); letter-spacing: 1px; }
+  .wf-rotate-chip { padding: 3px 10px; border: 1px solid var(--accent); border-radius: 1px; font-family: 'Space Mono', monospace; font-size: 9px; color: var(--accent); letter-spacing: 2px; }
+  .wf-rotate-arrow { font-family: 'Space Mono', monospace; font-size: 8px; color: var(--muted); }
+
+  .wf-body-text { width: 65%; height: 9px; background: var(--border); border-radius: 1px; margin-bottom: 5px; }
+  .wf-body-text.short { width: 45%; }
+  .wf-cta-row { display: flex; gap: 8px; margin-top: 14px; }
+  .wf-btn { height: 30px; border-radius: 2px; }
+  .wf-btn.primary { width: 100px; background: var(--accent); opacity: 0.9; }
+  .wf-btn.outline { width: 100px; background: transparent; border: 1px solid var(--border); }
+
+  .wf-cursor-note { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; padding: 6px 10px; border: 1px dashed var(--accent); border-radius: 2px; opacity: 0.8; }
+  .wf-cursor-icon { width: 16px; height: 16px; position: relative; flex-shrink: 0; }
+  .wf-cursor-icon::before, .wf-cursor-icon::after { content: ''; position: absolute; background: var(--accent); }
+  .wf-cursor-icon::before { width: 100%; height: 1px; top: 50%; left: 0; }
+  .wf-cursor-icon::after { width: 1px; height: 100%; left: 50%; top: 0; }
+  .wf-cursor-circle { width: 10px; height: 10px; border: 1px solid var(--accent); border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  .wf-cursor-text { font-family: 'Space Mono', monospace; font-size: 8px; color: var(--accent); letter-spacing: 1px; }
+
+  .wf-block { background: var(--gray2); border: 1px solid var(--border); border-radius: 2px; margin-bottom: 10px; }
+  .wf-label { font-family: 'Space Mono', monospace; font-size: 8px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; padding: 5px 8px; border-bottom: 1px solid var(--border); }
+  .wf-label.accent { color: var(--accent); }
+  .wf-content { padding: 10px 8px; }
+  .wf-line { height: 8px; background: var(--border); border-radius: 1px; margin-bottom: 5px; }
+  .wf-line.w100 { width: 100%; } .wf-line.w80 { width: 80%; } .wf-line.w60 { width: 60%; } .wf-line.w40 { width: 40%; }
+
+  .wf-img-placeholder { background: var(--gray2); border: 1px dashed var(--border); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 1px; }
+  .wf-tag-row { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+  .wf-tag { padding: 3px 8px; border-radius: 2px; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1px; }
+  .wf-tag.tech { background: var(--black); border: 1px solid var(--accent); color: var(--accent); }
+  .wf-tag.neutral { background: var(--black); border: 1px solid var(--border); color: var(--muted); }
+  .wf-row { display: flex; gap: 12px; margin-bottom: 10px; }
+
+  /* VINYL */
+  .vinyl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .vinyl-card { border: 1px solid var(--border); border-radius: 2px; overflow: hidden; }
+  .vinyl-card-inner { display: flex; }
+  .vinyl-sleeve { flex: 1; padding: 10px; background: var(--black); min-height: 110px; display: flex; flex-direction: column; justify-content: space-between; }
+  .vinyl-disc { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); background: radial-gradient(circle, #222 30%, #111 31%, #1a1a1a 60%, #111 61%); flex-shrink: 0; position: relative; }
+  .vinyl-disc::after { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.7; }
+  .vinyl-title { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--white); line-height: 1; margin-bottom: 3px; }
+  .vinyl-tracklist { display: flex; flex-direction: column; gap: 2px; }
+  .vinyl-track { font-family: 'Space Mono', monospace; font-size: 7px; color: var(--muted); letter-spacing: 1px; }
+  .vinyl-track.accent { color: var(--accent); }
+  .vinyl-hover-panel { background: var(--gray2); border-left: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; padding: 10px 8px; width: 90px; }
+  .vinyl-hover-note { font-family: 'Space Mono', monospace; font-size: 8px; color: var(--accent); letter-spacing: 1px; text-align: center; padding: 6px; border: 1px dashed var(--accent); border-radius: 2px; margin-top: 8px; opacity: 0.7; }
+
+  /* SKILLS */
+  .wf-skill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .wf-skill-chip { background: var(--black); border: 1px solid var(--border); border-radius: 2px; padding: 6px; display: flex; flex-direction: column; gap: 4px; }
+  .wf-skill-bar { height: 4px; background: var(--accent); opacity: 0.6; border-radius: 2px; }
+
+  /* JOURNAL */
+  .wf-post-list { display: flex; flex-direction: column; gap: 8px; }
+  .wf-post-item { border: 1px solid var(--border); border-radius: 2px; padding: 10px; display: flex; gap: 10px; align-items: flex-start; }
+  .wf-post-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--accent); opacity: 0.35; line-height: 1; min-width: 28px; }
+
+  /* CONTACT */
+  .wf-contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .wf-contact-tile { border: 1px solid var(--border); border-radius: 2px; padding: 14px 12px; display: flex; align-items: center; gap: 10px; }
+  .wf-contact-icon { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); opacity: 0.4; flex-shrink: 0; }
+
+  .wf-footer { border: 1px solid var(--border); padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; border-radius: 2px; margin-top: 10px; }
+  .wf-footer-text { width: 100px; height: 8px; background: var(--border); border-radius: 1px; }
+  .wf-footer-links { display: flex; gap: 6px; }
+  .wf-footer-link { width: 24px; height: 8px; background: var(--border); border-radius: 1px; }
+
+  /* ANIMATION MAP */
+  .anim-map { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .anim-card { border: 1px solid var(--border); border-radius: 2px; background: var(--gray); overflow: hidden; }
+  .anim-card-header { background: var(--gray2); padding: 8px 12px; border-bottom: 1px solid var(--border); font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: var(--accent); }
+  .anim-card-body { padding: 12px; }
+  .anim-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+  .anim-badge { font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 1px; padding: 2px 6px; border-radius: 1px; flex-shrink: 0; margin-top: 1px; }
+  .anim-badge.big { background: var(--accent); color: var(--black); }
+  .anim-badge.micro { background: var(--gray2); border: 1px solid var(--border); color: var(--muted); }
+  .anim-text { font-family: 'Space Mono', monospace; font-size: 9px; color: #888; letter-spacing: 0.5px; line-height: 1.5; }
+
+  /* NOTES */
+  .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .note-card { border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 16px; border-radius: 2px; background: var(--gray); }
+  .note-card h4 { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .note-card p { font-size: 13px; color: #aaa; line-height: 1.6; }
+  .note-card ul { padding-left: 16px; }
+  .note-card ul li { font-size: 13px; color: #aaa; line-height: 1.8; }
+  code { font-family: 'Space Mono', monospace; background: var(--black); border: 1px solid var(--border); color: var(--accent); font-size: 11px; padding: 1px 6px; border-radius: 2px; }
+
+  /* BUILD ORDER */
+  .steps-list { display: flex; flex-direction: column; gap: 12px; }
+  .step { display: flex; gap: 16px; align-items: flex-start; padding: 16px; border: 1px solid var(--border); border-radius: 2px; background: var(--gray); }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--accent); line-height: 1; min-width: 40px; }
+  .step-text h4 { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .step-text p { font-size: 13px; color: #aaa; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <h1>PORTFOLIO <span>BLUEPRINT</span></h1>
+  <p>Sitemap · Wireframes v2 · Animation Map · Build Order — Next.js Personal Portfolio</p>
+</div>
+
+<!-- SITEMAP -->
+<section>
+  <div class="section-title">01 — Sitemap</div>
+  <div class="sitemap">
+    <div class="sm-root">yourdomain.com</div>
+    <div class="sm-connector-v"></div>
+    <div class="sm-h-line">
+      <div class="sm-col">
+        <div class="sm-col-connector"></div>
+        <div class="sm-node">/ Home</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">Hero — name + rotating role</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">Featured Project</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">Quick About strip</div>
+      </div>
+      <div class="sm-col">
+        <div class="sm-col-connector"></div>
+        <div class="sm-node">/about</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">Bio + photo</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">Tech stack grid</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">Interests strip</div>
+      </div>
+      <div class="sm-col">
+        <div class="sm-col-connector"></div>
+        <div class="sm-node">/projects</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">Vinyl sleeve cards</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">/projects/[slug]</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">Case study</div>
+      </div>
+      <div class="sm-col">
+        <div class="sm-col-connector"></div>
+        <div class="sm-node">/journal</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">Numbered post list</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">/journal/[slug]</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">MDX post</div>
+      </div>
+      <div class="sm-col">
+        <div class="sm-col-connector"></div>
+        <div class="sm-node">/contact</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">Social tiles</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">Contact form</div>
+        <div class="sm-sub-connector"></div>
+        <div class="sm-sub">Download CV</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WIREFRAMES -->
+<section>
+  <div class="section-title">02 — Wireframes</div>
+  <div class="wf-grid">
+
+    <!-- HOME -->
+    <div class="wf-card">
+      <div class="wf-card-header">
+        <div class="wf-dot accent"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+        <span>/ — HOME</span>
+        <span class="page-note">crosshair cursor — all pages</span>
+      </div>
+      <div class="wf-body">
+        <div class="wf-cursor-note">
+          <div class="wf-cursor-icon"><div class="wf-cursor-circle"></div></div>
+          <span class="wf-cursor-text">Custom crosshair cursor — active sitewide — gaming detail 🎮</span>
+        </div>
+        <div class="wf-navbar">
+          <div class="wf-navbar-note">STICKY — always visible on scroll</div>
+          <div class="wf-initials">XX</div>
+          <div class="wf-nav-links">
+            <div class="wf-nav-link active"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+          </div>
+        </div>
+        <div class="wf-hero">
+          <div class="wf-corner-tag">full viewport height</div>
+          <div class="wf-anim-tag">▶ stagger on load</div>
+          <div class="wf-name-block"></div>
+          <div class="wf-name-block" style="width:65%;margin-bottom:12px"></div>
+          <div class="wf-rotating-text">
+            <span class="wf-rotate-label">I'm a</span>
+            <div class="wf-rotate-chip">DEVELOPER</div>
+            <span class="wf-rotate-arrow">↔ cycles: designer · gamer</span>
+          </div>
+          <div class="wf-body-text"></div>
+          <div class="wf-body-text short"></div>
+          <div class="wf-cta-row">
+            <div class="wf-btn primary"></div>
+            <div class="wf-btn outline"></div>
+          </div>
+        </div>
+        <div class="wf-block">
+          <div class="wf-label accent">Featured Project — teaser card</div>
+          <div class="wf-content">
+            <div class="wf-row">
+              <div class="wf-img-placeholder" style="width:110px;height:65px;flex-shrink:0">IMG</div>
+              <div style="flex:1">
+                <div class="wf-line w80" style="height:12px;background:#f5f5f033;margin-bottom:6px"></div>
+                <div class="wf-line w100"></div>
+                <div class="wf-line w80"></div>
+                <div class="wf-tag-row">
+                  <div class="wf-tag tech">Next.js</div>
+                  <div class="wf-tag tech">TS</div>
+                  <div class="wf-tag neutral">→ Case study</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-block">
+          <div class="wf-label">Quick About strip + CTA → /about</div>
+          <div class="wf-content">
+            <div class="wf-line w100"></div>
+            <div class="wf-line w70" style="width:70%"></div>
+            <div style="margin-top:8px"><div class="wf-btn primary" style="width:80px;height:22px;display:inline-block"></div></div>
+          </div>
+        </div>
+        <div class="wf-footer">
+          <div class="wf-footer-text"></div>
+          <div class="wf-footer-links"><div class="wf-footer-link"></div><div class="wf-footer-link"></div><div class="wf-footer-link"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="wf-card">
+      <div class="wf-card-header">
+        <div class="wf-dot accent"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+        <span>/about — ABOUT ME</span>
+        <span class="page-note">professional + personality</span>
+      </div>
+      <div class="wf-body">
+        <div class="wf-navbar">
+          <div class="wf-navbar-note">STICKY NAVBAR</div>
+          <div class="wf-initials">XX</div>
+          <div class="wf-nav-links">
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link active"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+          </div>
+        </div>
+        <div class="wf-hero" style="padding:16px 24px">
+          <div class="wf-anim-tag" style="font-size:7px">▶ fade in on load</div>
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:2px;margin-bottom:6px">// who i am</div>
+          <div class="wf-name-block" style="height:36px;width:80%"></div>
+        </div>
+        <div class="wf-block">
+          <div class="wf-label">Bio — professional story first</div>
+          <div class="wf-content">
+            <div class="wf-row">
+              <div style="flex:1">
+                <div class="wf-line w100"></div>
+                <div class="wf-line w100"></div>
+                <div class="wf-line w80"></div>
+                <div class="wf-line w100"></div>
+                <div class="wf-line w60"></div>
+              </div>
+              <div class="wf-img-placeholder" style="width:75px;height:85px;flex-shrink:0">PFP</div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-block">
+          <div class="wf-label accent">Tech Stack — bars animate in on scroll</div>
+          <div class="wf-content">
+            <div class="wf-skill-grid">
+              <div class="wf-skill-chip"><div class="wf-line w80" style="height:8px"></div><div class="wf-skill-bar" style="width:90%"></div></div>
+              <div class="wf-skill-chip"><div class="wf-line w80" style="height:8px"></div><div class="wf-skill-bar" style="width:75%"></div></div>
+              <div class="wf-skill-chip"><div class="wf-line w80" style="height:8px"></div><div class="wf-skill-bar" style="width:80%"></div></div>
+              <div class="wf-skill-chip"><div class="wf-line w80" style="height:8px"></div><div class="wf-skill-bar" style="width:65%"></div></div>
+              <div class="wf-skill-chip"><div class="wf-line w80" style="height:8px"></div><div class="wf-skill-bar" style="width:70%"></div></div>
+              <div class="wf-skill-chip"><div class="wf-line w80" style="height:8px"></div><div class="wf-skill-bar" style="width:55%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-block">
+          <div class="wf-label">Interests — personality peek 🎵 🎮 👟</div>
+          <div class="wf-content">
+            <div class="wf-row">
+              <div class="wf-img-placeholder" style="flex:1;height:48px;border-color:var(--accent);opacity:.6">hiphop</div>
+              <div class="wf-img-placeholder" style="flex:1;height:48px;border-color:var(--accent);opacity:.6">gaming</div>
+              <div class="wf-img-placeholder" style="flex:1;height:48px;border-color:var(--accent);opacity:.6">streetwear</div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-footer">
+          <div class="wf-footer-text"></div>
+          <div class="wf-footer-links"><div class="wf-footer-link"></div><div class="wf-footer-link"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="wf-card">
+      <div class="wf-card-header">
+        <div class="wf-dot accent"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+        <span>/projects — VINYL SLEEVE GRID</span>
+        <span class="page-note">hover slides open panel</span>
+      </div>
+      <div class="wf-body">
+        <div class="wf-navbar">
+          <div class="wf-navbar-note">STICKY NAVBAR</div>
+          <div class="wf-initials">XX</div>
+          <div class="wf-nav-links">
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link active"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+          </div>
+        </div>
+        <div class="wf-hero" style="padding:16px 24px">
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:2px;margin-bottom:6px">// what i've built</div>
+          <div class="wf-name-block" style="height:36px;width:60%"></div>
+        </div>
+        <div class="wf-block">
+          <div class="wf-label accent">Vinyl Sleeve Cards — hover to slide open</div>
+          <div class="wf-content">
+            <div class="vinyl-grid">
+              <!-- HOVERED STATE -->
+              <div>
+                <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--accent);letter-spacing:1px;margin-bottom:4px">← HOVER STATE (panel open)</div>
+                <div class="vinyl-card">
+                  <div class="vinyl-card-inner">
+                    <div class="vinyl-sleeve">
+                      <div>
+                        <div class="vinyl-title">PROJECT ONE</div>
+                        <div class="vinyl-tracklist">
+                          <div class="vinyl-track accent">01. Next.js</div>
+                          <div class="vinyl-track">02. TypeScript</div>
+                          <div class="vinyl-track">03. Tailwind</div>
+                        </div>
+                      </div>
+                      <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+                        <div class="vinyl-disc"></div>
+                        <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--muted);letter-spacing:1px">2026</div>
+                      </div>
+                    </div>
+                    <div class="vinyl-hover-panel">
+                      <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--muted);letter-spacing:1px;margin-bottom:4px">Short project</div>
+                      <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--muted);letter-spacing:1px;margin-bottom:8px">description here</div>
+                      <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--black);background:var(--accent);padding:4px 6px;border-radius:1px;white-space:nowrap;margin-bottom:4px">View ↗</div>
+                      <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--muted);border:1px solid var(--border);padding:4px 6px;border-radius:1px;white-space:nowrap">GitHub ↗</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- DEFAULT STATE -->
+              <div>
+                <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--muted);letter-spacing:1px;margin-bottom:4px">DEFAULT STATE (closed) →</div>
+                <div class="vinyl-card" style="opacity:.4;border-style:dashed">
+                  <div class="vinyl-card-inner">
+                    <div class="vinyl-sleeve">
+                      <div>
+                        <div class="vinyl-title" style="opacity:.4">COMING SOON</div>
+                        <div class="vinyl-tracklist">
+                          <div class="vinyl-track">01. — — —</div>
+                          <div class="vinyl-track">02. — — —</div>
+                        </div>
+                      </div>
+                      <div style="margin-top:8px"><div class="vinyl-disc" style="opacity:.3"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="vinyl-hover-note">hover the left card to preview the slide-out interaction</div>
+          </div>
+        </div>
+        <div class="wf-footer">
+          <div class="wf-footer-text"></div>
+          <div class="wf-footer-links"><div class="wf-footer-link"></div><div class="wf-footer-link"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT DETAIL -->
+    <div class="wf-card">
+      <div class="wf-card-header">
+        <div class="wf-dot accent"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+        <span>/projects/[slug] — CASE STUDY</span>
+        <span class="page-note">dynamic route</span>
+      </div>
+      <div class="wf-body">
+        <div class="wf-navbar">
+          <div class="wf-navbar-note">STICKY NAVBAR</div>
+          <div class="wf-initials">XX</div>
+          <div class="wf-nav-links">
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link active"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+          </div>
+        </div>
+        <div class="wf-hero" style="padding:16px 24px">
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:2px;margin-bottom:6px">// project name</div>
+          <div class="wf-name-block" style="height:40px;width:85%"></div>
+          <div class="wf-tag-row" style="margin-top:8px">
+            <div class="wf-tag tech">Next.js</div>
+            <div class="wf-tag tech">TypeScript</div>
+            <div class="wf-tag neutral">Live ↗</div>
+            <div class="wf-tag neutral">GitHub ↗</div>
+          </div>
+        </div>
+        <div class="wf-img-placeholder" style="width:100%;height:110px;margin-bottom:10px;border-radius:2px">PROJECT SCREENSHOT / VIDEO</div>
+        <div class="wf-block">
+          <div class="wf-label accent">The Problem</div>
+          <div class="wf-content"><div class="wf-line w100"></div><div class="wf-line w80"></div></div>
+        </div>
+        <div class="wf-block">
+          <div class="wf-label">My Approach</div>
+          <div class="wf-content"><div class="wf-line w100"></div><div class="wf-line w100"></div><div class="wf-line w60"></div></div>
+        </div>
+        <div class="wf-block">
+          <div class="wf-label">What I Learned</div>
+          <div class="wf-content"><div class="wf-line w100"></div><div class="wf-line w80"></div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:10px">
+          <div class="wf-btn outline" style="height:24px;width:80px"></div>
+          <div class="wf-btn primary" style="height:24px;width:80px"></div>
+        </div>
+        <div class="wf-footer" style="margin-top:10px">
+          <div class="wf-footer-text"></div>
+          <div class="wf-footer-links"><div class="wf-footer-link"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOURNAL -->
+    <div class="wf-card">
+      <div class="wf-card-header">
+        <div class="wf-dot accent"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+        <span>/journal — DEV JOURNEY</span>
+        <span class="page-note">MDX powered</span>
+      </div>
+      <div class="wf-body">
+        <div class="wf-navbar">
+          <div class="wf-navbar-note">STICKY NAVBAR</div>
+          <div class="wf-initials">XX</div>
+          <div class="wf-nav-links">
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link active"></div>
+            <div class="wf-nav-link"></div>
+          </div>
+        </div>
+        <div class="wf-hero" style="padding:16px 24px">
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:2px;margin-bottom:6px">// my dev journey</div>
+          <div class="wf-name-block" style="height:36px;width:55%"></div>
+        </div>
+        <div class="wf-block">
+          <div class="wf-label accent">Posts — numbered like a setlist, stagger in on load</div>
+          <div class="wf-content">
+            <div class="wf-post-list">
+              <div class="wf-post-item">
+                <div class="wf-post-num">01</div>
+                <div style="flex:1">
+                  <div class="wf-line w80" style="height:11px;margin-bottom:5px"></div>
+                  <div class="wf-line w100"></div>
+                  <div class="wf-line w60"></div>
+                  <div class="wf-tag-row">
+                    <div class="wf-tag neutral" style="font-size:7px">Mar 2026</div>
+                    <div class="wf-tag neutral" style="font-size:7px">5 min read</div>
+                  </div>
+                </div>
+              </div>
+              <div class="wf-post-item" style="opacity:.6">
+                <div class="wf-post-num">02</div>
+                <div style="flex:1">
+                  <div class="wf-line w80" style="height:11px;margin-bottom:5px;width:70%"></div>
+                  <div class="wf-line w80"></div>
+                  <div class="wf-tag-row"><div class="wf-tag neutral" style="font-size:7px">Feb 2026</div></div>
+                </div>
+              </div>
+              <div class="wf-post-item" style="opacity:.25">
+                <div class="wf-post-num">03</div>
+                <div style="flex:1">
+                  <div class="wf-line w60" style="height:11px;margin-bottom:5px;width:60%"></div>
+                  <div class="wf-line w40"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-footer">
+          <div class="wf-footer-text"></div>
+          <div class="wf-footer-links"><div class="wf-footer-link"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="wf-card">
+      <div class="wf-card-header">
+        <div class="wf-dot accent"></div><div class="wf-dot"></div><div class="wf-dot"></div>
+        <span>/contact — CONTACT</span>
+        <span class="page-note">dead simple</span>
+      </div>
+      <div class="wf-body">
+        <div class="wf-navbar">
+          <div class="wf-navbar-note">STICKY NAVBAR</div>
+          <div class="wf-initials">XX</div>
+          <div class="wf-nav-links">
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link"></div>
+            <div class="wf-nav-link active"></div>
+          </div>
+        </div>
+        <div class="wf-hero" style="padding:16px 24px">
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:2px;margin-bottom:6px">// let's talk</div>
+          <div class="wf-name-block" style="height:36px;width:65%"></div>
+          <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:1px;margin-top:8px">"got something to say? let's talk."</div>
+        </div>
+        <div class="wf-block">
+          <div class="wf-label accent">Social Tiles — scale on hover</div>
+          <div class="wf-content">
+            <div class="wf-contact-grid">
+              <div class="wf-contact-tile"><div class="wf-contact-icon"></div><div><div class="wf-line w80" style="height:9px;margin-bottom:4px"></div><div class="wf-line w60" style="height:7px"></div></div></div>
+              <div class="wf-contact-tile"><div class="wf-contact-icon"></div><div><div class="wf-line w80" style="height:9px;margin-bottom:4px"></div><div class="wf-line w60" style="height:7px"></div></div></div>
+              <div class="wf-contact-tile"><div class="wf-contact-icon"></div><div><div class="wf-line w80" style="height:9px;margin-bottom:4px"></div><div class="wf-line w60" style="height:7px"></div></div></div>
+              <div class="wf-contact-tile" style="border-color:var(--accent);opacity:.7"><div class="wf-contact-icon" style="background:var(--white);opacity:.3"></div><div><div class="wf-line w80" style="height:9px;margin-bottom:4px"></div><div class="wf-line w40" style="height:7px;background:var(--accent);opacity:.5"></div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-block">
+          <div class="wf-label">Contact Form</div>
+          <div class="wf-content">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="height:22px;background:var(--black);border:1px solid var(--border);border-radius:2px"></div>
+              <div style="height:22px;background:var(--black);border:1px solid var(--border);border-radius:2px"></div>
+              <div style="height:44px;background:var(--black);border:1px solid var(--border);border-radius:2px"></div>
+              <div class="wf-btn primary" style="height:26px;width:100%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-footer">
+          <div class="wf-footer-text"></div>
+          <div class="wf-footer-links"><div class="wf-footer-link"></div><div class="wf-footer-link"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ANIMATION MAP -->
+<section>
+  <div class="section-title">03 — Animation Map</div>
+  <div class="anim-map">
+    <div class="anim-card">
+      <div class="anim-card-header">/ Home</div>
+      <div class="anim-card-body">
+        <div class="anim-row"><span class="anim-badge big">BIG</span><span class="anim-text">Name letters stagger drop-in on page load — one moment, maximum impact</span></div>
+        <div class="anim-row"><span class="anim-badge micro">micro</span><span class="anim-text">Rotating subtitle cycles: developer → designer → gamer with clip transition</span></div>
+        <div class="anim-row"><span class="anim-badge micro">micro</span><span class="anim-text">CTA buttons — lime glow pulse on hover</span></div>
+      </div>
+    </div>
+    <div class="anim-card">
+      <div class="anim-card-header">/projects</div>
+      <div class="anim-card-body">
+        <div class="anim-row"><span class="anim-badge big">BIG</span><span class="anim-text">Vinyl sleeve slides open on hover — panel reveals description + links</span></div>
+        <div class="anim-row"><span class="anim-badge micro">micro</span><span class="anim-text">Card border brightens to accent color on hover</span></div>
+        <div class="anim-row"><span class="anim-badge micro">micro</span><span class="anim-text">Vinyl disc spins slowly on hover</span></div>
+      </div>
+    </div>
+    <div class="anim-card">
+      <div class="anim-card-header">/about</div>
+      <div class="anim-card-body">
+        <div class="anim-row"><span class="anim-badge big">BIG</span><span class="anim-text">Skill bars animate width from 0 when scrolled into view</span></div>
+        <div class="anim-row"><span class="anim-badge micro">micro</span><span class="anim-text">Sections fade up as they enter viewport</span></div>
+        <div class="anim-row"><span class="anim-badge micro">micro</span><span class="anim-text">Interest icons scale up gently on hover</span></div>
+      </div>
+    </div>
+    <div class="anim-card">
+      <div class="anim-card-header">/journal</div>
+      <div class="anim-card-body">
+        <div class="anim-row"><span class="anim-badge big">BIG</span><span class="anim-text">Post list staggers in on load — each row enters with a slight delay</span></div>
+        <div class="anim-row"><span class="anim-badge micro">micro</span><span class="anim-text">Post item lifts up (translateY) on hover with border accent</span></div>
+      </div>
+    </div>
+    <div class="anim-card">
+      <div class="anim-card-header">/contact</div>
+      <div class="anim-card-body">
+        <div class="anim-row"><span class="anim-badge micro">micro</span><span class="anim-text">Social tiles scale slightly on hover — clean, confident</span></div>
+        <div class="anim-row"><span class="anim-badge micro">micro</span><span class="anim-text">Form inputs get accent border glow on focus</span></div>
+      </div>
+    </div>
+    <div class="anim-card">
+      <div class="anim-card-header">Global</div>
+      <div class="anim-card-body">
+        <div class="anim-row"><span class="anim-badge big">BIG</span><span class="anim-text">Crosshair cursor — replaces default cursor sitewide 🎮</span></div>
+        <div class="anim-row"><span class="anim-badge micro">micro</span><span class="anim-text">Navbar links — underline slides in from left on hover</span></div>
+        <div class="anim-row"><span class="anim-badge micro">micro</span><span class="anim-text">Page transitions — subtle fade between routes</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN NOTES -->
+<section>
+  <div class="section-title">04 — Design Notes</div>
+  <div class="notes-grid">
+    <div class="note-card">
+      <h4>Color Palette</h4>
+      <p>Near-black <code>#0a0a0a</code> base · Electric lime <code>#CAFF00</code> accent · Off-white <code>#f5f5f0</code> text. One accent color, used sparingly = maximum impact. Never fill backgrounds with the accent — keep it as a signal.</p>
+    </div>
+    <div class="note-card">
+      <h4>Typography</h4>
+      <p><strong>Bebas Neue</strong> for display headings — loud, compressed, commanding. <strong>Space Mono</strong> for labels and metadata. <strong>Inter</strong> for body copy. This trio gives you editorial + technical + readable.</p>
+    </div>
+    <div class="note-card">
+      <h4>Animation Libraries</h4>
+      <p><strong>Framer Motion</strong> — your main tool. Page transitions, scroll animations, hover effects. <strong>Tailwind transitions</strong> for simple hovers. Add <strong>GSAP</strong> only if Framer Motion can't handle it. Keep the stack lean.</p>
+    </div>
+    <div class="note-card">
+      <h4>Culture Details</h4>
+      <ul>
+        <li>Crosshair cursor — gaming identity 🎮</li>
+        <li>Vinyl sleeve cards — music identity 🎵</li>
+        <li>Rotating hero subtitle — dev · designer · gamer</li>
+        <li>Interests section — hiphop, gaming, streetwear 👟</li>
+        <li>Footer easter egg — keep it subtle</li>
+      </ul>
+    </div>
+    <div class="note-card">
+      <h4>Journal / MDX Setup</h4>
+      <p>Use <code>next-mdx-remote</code> for blog posts. Store posts as <code>.mdx</code> files in <code>/content/journal/</code>. First post: <em>"Building my portfolio from scratch — why I planned before I coded."</em></p>
+    </div>
+    <div class="note-card">
+      <h4>Deployment</h4>
+      <p>Deploy to <strong>Vercel</strong> — built for Next.js, free tier, auto-deploys on every GitHub push. Connect a custom domain. Every push to <code>main</code> = live. Share that URL everywhere.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BUILD ORDER -->
+<section>
+  <div class="section-title">05 — Build Order</div>
+  <div class="steps-list">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-text">
+        <h4>Init + global setup</h4>
+        <p>Run <code>npx create-next-app@latest</code> — TypeScript + Tailwind + App Router. Install Framer Motion. Set up CSS variables. Push to GitHub immediately.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-text">
+        <h4>Navbar + crosshair cursor</h4>
+        <p>Build <code>app/layout.tsx</code> with sticky navbar — initials logo left, links right. Add custom crosshair cursor as a Client Component. These live on every page, get them right first.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-text">
+        <h4>Home page — hero + stagger animation</h4>
+        <p>Big name stagger, rotating subtitle with Framer Motion, two CTAs. Teaches you the difference between Server and Client Components — the animation requires <code>"use client"</code>.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-text">
+        <h4>Projects page — vinyl cards + dynamic route</h4>
+        <p>Build the vinyl sleeve card with CSS hover transition. Then tackle <code>[slug]</code> dynamic routing, <code>generateStaticParams</code>, and the case study layout. Core Next.js skills all in one page.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-text">
+        <h4>About page — scroll animations</h4>
+        <p>Bio, animated skill bars using Framer Motion's <code>useInView</code>, interests strip. Teaches scroll-triggered animations and how to keep a page clean while still showing personality.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">06</div>
+      <div class="step-text">
+        <h4>Journal — MDX setup</h4>
+        <p>Install <code>next-mdx-remote</code>. Create <code>/content/journal/</code>. Build the list page and <code>[slug]</code> post page. Write your first post. No database needed — this is a great Next.js learning moment.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">07</div>
+      <div class="step-text">
+        <h4>Contact + polish + deploy</h4>
+        <p>Contact page with social tiles and form. Full design pass — spacing, consistency, details. Add page transitions. Deploy to Vercel. That live URL is your job application.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
