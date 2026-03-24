@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -21,14 +22,26 @@ export default function NavBar() {
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="sticky top-0 z-50 flex items-center justify-between px-8 py-3 bg-[var(--background)] border-b border-[var(--border)]"
     >
-      <motion.span
+      <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.35, duration: 0.3, ease: "easeOut" }}
-        className="text-2xl tracking-widest text-[var(--accent)] font-[var(--font-display)]"
       >
-        IF
-      </motion.span>
+        <Image
+          src="/logo.png"
+          alt="IF"
+          width={80}
+          height={80}
+          className="hidden dark:block"
+        />
+        <Image
+          src="/logo-light.png"
+          alt="IF"
+          width={80}
+          height={80}
+          className="block dark:hidden"
+        />
+      </motion.div>
 
       <div className="flex items-center gap-1">
         {navLinks.map((nav) => (
