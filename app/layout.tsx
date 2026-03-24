@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bebas_Neue, Space_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/nav-bar";
+import CustomCursor from "@/components/ui/custom-cursor";
 
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
@@ -37,6 +38,7 @@ export default function RootLayout({
       className={` ${bebasNeue.variable} ${spaceMono.variable} ${inter.variable} antialiased`}
     >
       <body>
+        <CustomCursor></CustomCursor>
         <NavBar></NavBar>
         {children}
       </body>
