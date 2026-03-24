@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bebas_Neue, Space_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/nav-bar";
+import Footer from "@/components/footer";
 import CustomCursor from "@/components/ui/custom-cursor";
 
 const bebasNeue = Bebas_Neue({
@@ -41,6 +42,7 @@ export default function RootLayout({
         <CustomCursor></CustomCursor>
         <NavBar></NavBar>
         {children}
+        <Footer></Footer>
       </body>
     </html>
   );
