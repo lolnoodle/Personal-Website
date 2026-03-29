@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 
 export default function HeroSection() {
   const cycleLabels = [
@@ -19,16 +20,25 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <div className="m-1">
-      <div className="p-2 font-[var(--font-bebas)] text-[52px]">
+    <div className="m-1 px-2">
+      <motion.div
+        transition={{}}
+        animate={{ x: 0, opacity: 1 }}
+        className="font-[var(--font-bebas)] text-[52px]"
+      >
         ISSAM FISSOUNE
-      </div>
-      <div className="flex">
+      </motion.div>
+      <motion.div
+        initial={{ y: 30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 1.2 }}
+        className="flex"
+      >
         <div className="">I am a &nbsp;</div>
-        <div>
-          <p>{cycleLabels[currentIndex]}</p>
+        <div className="border border-[var(--accent)] px-1">
+          <p className="text-[var(--accent)]">{cycleLabels[currentIndex]}</p>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
