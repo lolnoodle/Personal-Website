@@ -80,10 +80,10 @@ export default function HeroSection() {
         initial={{ y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 1.2 }}
-        className="flex m-2"
+        className="flex m-1"
       >
         <div className="text-2xl font-bebas">I am a &nbsp;</div>
-        <div className="border border-[var(--accent)] px-1">
+        <div className="border border-[var(--accent)] px-2">
           <p className="text-[var(--accent)] text-2xl font-bebas">
             {cycleLabels[currentIndex]}
           </p>
