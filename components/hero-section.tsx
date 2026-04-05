@@ -32,20 +32,20 @@ export default function HeroSection() {
   };
 
   return (
-    <div className="flex flex-col w-full m-2 px-4 border-[var(--border)] border-solid border-2 bg-[var(--background2)] ">
-      <div className="my-2 space-y-0.5">
+    <div className="flex flex-col m-2 p-2 border-[var(--border)] border-solid border-2 bg-[var(--background3)] ">
+      <div className="my-2 space-y-3">
         {/* ISSAM box */}
         <motion.div
           initial={{ clipPath: "inset(0 100% 0 0)" }}
           animate={{ clipPath: "inset(0 0% 0 0)" }}
           transition={{ duration: 0.7, ease: "easeInOut", delay: 0 }}
-          className="bg-white w-full rounded-md"
+          className="bg-[var(--background2)] w-full rounded-md px-3 "
         >
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="text-black text-[120px] font-bebas "
+            className="text-[var(--text)] text-[120px] font-bebas"
           >
             {"ISSAM".split("").map((letter, index) => (
               <motion.span key={index} variants={letterVariants}>
@@ -60,13 +60,13 @@ export default function HeroSection() {
           initial={{ clipPath: "inset(0 100% 0 0)" }}
           animate={{ clipPath: "inset(0 0% 0 0)" }}
           transition={{ duration: 0.7, ease: "easeInOut", delay: 0.5 }}
-          className="bg-white rounded-md w-3/4"
+          className="bg-[var(--background2)] rounded-md px-3 w-3/4"
         >
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="text-black font-bebas text-[120px]"
+            className="text-[var(--text)] text-[120px] font-bebas"
           >
             {"FISSOUNE".split("").map((letter, index) => (
               <motion.span key={index} variants={letterVariants}>
