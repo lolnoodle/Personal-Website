@@ -7,9 +7,6 @@
   --border: #d4c5f5;
   --text: #1a0a2e;
   --accent: #7b2fbe;
-  --font-display: var(--font-bebas);
-  --font-body: var(--font-inter);
-  --font-tags: var(--font-space);
 }
 
 @theme inline {
@@ -18,6 +15,9 @@
   --font-bebas: var(--font-bebas-neue);
   --font-space: var(--font-space-mono);
   --font-inter: var(--font-inter-regular);
+  --font-display: var(--font-bebas);
+  --font-body: var(--font-inter);
+  --font-tags: var(--font-space);
 }
 
 @media (prefers-color-scheme: dark) {
