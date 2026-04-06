@@ -37,13 +37,13 @@ function ProjectSection() {
         </div>
         <div className="col-span-2 flex justify-between items-center">
           <div className="flex flex-row space-x-3">
-            <p className="border-[var(--accent)] border-2 p-1 font-bebas text-xl">
+            <p className="border-[var(--accent)] text-[var(--accent)] border-3 p-1.5 rounded-md font-bebas text-xl bg-white dark:bg-black shadow-md/20 dark:shadow-white">
               REACT NATIVE
             </p>
-            <p className="border-[var(--accent)] border-2 p-1 font-bebas text-xl">
+            <p className="border-[var(--accent)] text-[var(--accent)] border-3 p-1.5 rounded-md font-bebas text-xl bg-white dark:bg-black shadow-md/20 dark:shadow-white">
               FIRE BASE
             </p>
-            <p className="border-[var(--accent)] border-2 p-1 font-bebas text-xl">
+            <p className="border-[var(--accent)] text-[var(--accent)] border-3 p-1.5 rounded-md font-bebas text-xl bg-white dark:bg-black shadow-md/20 dark:shadow-white">
               EXPO
             </p>
           </div>
