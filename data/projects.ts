@@ -11,14 +11,14 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Project One",
-    slug: "project-one",
+    title: "Banlieue",
+    slug: "banlieue",
     description:
       "A short punchy description of what the project does and the problem it solves.",
     year: "2025",
     tags: ["React Native", "Firebase", "Expo"],
     github: "https://github.com/lolnoodle",
-    image: "/logo.png",
+    image: "/Ballieue-image2.png",
     featured: true,
   },
   {
