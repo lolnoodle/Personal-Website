@@ -11,8 +11,8 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Banlieue",
-    slug: "banlieue",
+    title: "Ballieue",
+    slug: "ballieue",
     description:
       "A short punchy description of what the project does and the problem it solves.",
     year: "2025",
