@@ -66,7 +66,6 @@ This wasn't built by jumping straight into code. Before a single component was w
 - A complete **design system** covering colors, typography, spacing, components and motion specs
 - A **GitHub Projects board** with 42 issues across 8 epics tracking every feature from idea to done
 
-That process is documented in the `/docs` folder if you want to see how the project was structured from the start.
 
 ---
 
