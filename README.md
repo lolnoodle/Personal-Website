@@ -4,7 +4,7 @@
 
 ## Hey, welcome to my repo 👋
 
-I'm Issam — a 25 year old frontend developer from Rotterdam, fresh off a CMGT degree at Hogeschool Rotterdam. This portfolio is my corner of the internet where I show who I am, what I've built, and how I think.
+I'm Issam — a 26 year old frontend developer from Rotterdam, fresh off a CMGT degree at Hogeschool Rotterdam. This portfolio is my corner of the internet where I show who I am, what I've built, and how I think.
 
 If you're a recruiter or fellow developer poking around the codebase — glad you're here. Make yourself at home.
 
