@@ -1,0 +1,84 @@
+---
+title: "Ballieue"
+description: "A gamified street football app that gets kids off their screens and onto the pitch."
+tech: ["React Native", "Node.js", "Express", "Prisma", "Expo"]
+year: "2023 – 2024"
+type: "Team project + Solo continuation"
+status: "MVP built"
+---
+
+## The Idea
+
+Rotterdam kids aren't going outside anymore. That's not an opinion — CBS data showed a clear drop in physical activity among 12–20 year olds, with only 40.7% getting enough movement in 2021, down from 47.1% the year before. Kids would rather stay home and game.
+
+We didn't want to fight that instinct. We wanted to use it.
+
+Ballieue is a mobile app that turns street football into a game. To play, you have to actually go to a Cruyff Court. You join matches, earn XP, upgrade your player card, climb the leaderboard, and compete in ranked and unranked modes — just like a video game, but outside.
+
+---
+
+## My Role
+
+I was the **Ontwerpende Technoloog** (Design Technologist) on a five-person team. In practice that meant I led the front end — designing the screens, building the UI in React Native, and making sure what we built actually matched what our target audience wanted.
+
+In my third year I picked Ballieue back up as a solo PLE project. I used that time to go deeper on the concept — researching what was still missing, running user tests with the actual target audience, and proposing a set of improvements based on real feedback.
+
+---
+
+## The Problem We Solved
+
+Three core challenges shaped the whole product:
+
+**Getting kids outside** — the app only works if you physically show up to a Cruyff Court. No location, no match. That's the entire hook.
+
+**Making it safe** — every referee who signs up has to verify their identity with an ID scan. This gave parents enough confidence that their kids weren't just going to some random field unsupervised.
+
+**Keeping it fair** — we used player statistics to automatically matchmake opponents at similar skill levels. Lopsided matches kill motivation fast, especially for younger players.
+
+---
+
+## How We Built It
+
+We ran the project like a startup, moving through four sprints with stand-ups, retrospectives, and a full agile workflow. Before a single line of code was written we did:
+
+- **Doelgroep research** — interviews at voetbalclub Hermes D.V.S. in Schiedam with kids and parents to understand what actually stops children from going outside
+- **Design Sprint** — brainstorming sessions, a Harris Profile to choose our concept, and a Value Proposition Canvas to nail down who we were building for
+- **Sitemap + wireframes** — mapping every screen before touching code
+- **MoSCoW + INVEST prioritisation** — deciding which features were MVP and which were future sprints
+- **Business Model Canvas** — because we were treating this like a real startup, including a cost analysis and a pitch to the Gemeente Rotterdam as our potential investor
+
+The MVP screens we built: homepage, player stats, game lobby, leaderboard, achievements, and game modes.
+
+On the backend we built a REST API in Node.js with Express and Prisma handling six core functions — FindAllUser, FindOneUser, UpdateUser, DeleteUser, RegisterUser, and LoginUser.
+
+---
+
+## Solo Continuation — PLE Year 3
+
+When I picked this up again in my third year I focused on three things the original team hadn't fully solved:
+
+**Social features** — how do you make the app a place where kids actually build friendships, not just play matches and leave?
+
+**Referee alternatives** — parents can't always be there. We landed on partnering with buurtwerkers and T.O.S (Thuis Op Straat) workers — already active in the community, already trusted by local kids, and already paid by the gemeente. No extra cost, instant credibility.
+
+**More depth** — user testing showed the target audience wanted more. Training mode with XP rewards, pro clubs with friends, match highlights, a map showing live activity at every Cruyff Court nearby, and a ragequitter penalty system.
+
+I validated all of this through direct testing with the target audience — not assumptions, actual kids telling me what they wanted.
+
+---
+
+## What I Learned
+
+This was the project where I learned that research is the most important code you never write. The sprints where we skipped user testing or rushed the design phase always created more work later. The sprints where we slowed down and interviewed real people — that's where the best ideas came from.
+
+I also learned how to work in a real team with real disagreements, deadlines, and role divisions. Being the design technologist meant I was often the bridge between the idea and the implementation — translating wireframes into something buildable and translating feedback into something actionable.
+
+On the technical side: React Native is genuinely hard when you don't have a foundation. We underestimated that. If I were starting Ballieue today I would have chosen Expo with a solid component library and saved the native complexity for a later version.
+
+---
+
+## What's Next for Ballieue
+
+The concept has real legs. The Gemeente Rotterdam is a natural investor — kids' health and community activity are core parts of their agenda. The pilot goal was 15,000 active users in the Rotterdam region within 2 years.
+
+If I were to continue building it today I would migrate the backend to Supabase, rebuild the front end in React Native with Expo Router, and integrate real matchmaking logic using player rating data. The bones are solid. The idea is proven. It just needs more time.
