@@ -1,0 +1,94 @@
+---
+title: "Finding the balance — AI, vibe coding, and becoming a real developer"
+date: "2026-04-16"
+readTime: "6 min read"
+tags: ["AI", "Career", "Junior Dev", "Clean Code"]
+---
+
+Fresh out of Hogeschool Rotterdam with my CMGT degree and suddenly the question hits different — _now what?_
+
+Job hunting is weird. You spend four years building skills, doing projects, writing documentation nobody reads, presenting to panels, and then you graduate and the real test starts. No deadlines from a coach. No structured sprints. Just you, your laptop, and the question of whether you actually know what you're doing.
+
+My answer to that question has been to keep building. Keep learning. Keep shipping. And along the way I've been figuring out something that I think a lot of junior developers get wrong about AI — and honestly, about programming itself.
+
+---
+
+## The vibe coding conversation
+
+Everyone has an opinion on AI and coding right now. Half the internet says it's going to replace developers. The other half calls anyone who uses it a "vibe coder" who doesn't know what they're doing.
+
+I've been somewhere in the middle, trying to figure out where I actually stand.
+
+Here's what I've landed on: **vibe coding isn't the problem. Blind vibe coding is.**
+
+Let me explain. Copying AI-generated code without understanding it isn't really programming — it's just forwarding emails. You're not solving problems, you're relaying them. And that works until it doesn't, which is usually at the worst possible moment — a production bug, a code review, a job interview where someone asks you to explain your own work.
+
+But here's the thing people miss: the same applies to Stack Overflow. The same applies to copy-pasting from documentation. The tool was never the problem. The relationship with the tool is.
+
+---
+
+## AI as a senior developer
+
+The shift that changed everything for me was this: I stopped treating AI like a code generator and started treating it like a senior developer I have access to at any moment.
+
+Think about what that actually means. Most junior devs don't have that luxury. You get feedback in code reviews, in standups, maybe a quick question here and there — but you rarely get a senior who will sit with you, review your architecture decisions, explain _why_ something is a bad idea, and let you write the code yourself.
+
+That's what AI can be if you use it right.
+
+The prompts I use now sound nothing like "write me a navbar component." They sound like:
+
+_"I'm about to build a dynamic route for project case studies in Next.js App Router. Don't write the code — explain what files I need, why, and what I should watch out for."_
+
+Or:
+
+_"Here's the component I wrote. What would a senior dev change about this and why?"_
+
+The difference is I'm still writing the code. I'm still making the decisions. I'm using AI to compress the feedback loop that normally takes years of working alongside experienced developers.
+
+---
+
+## The part nobody talks about — architecture
+
+Here's where I think the real line is between someone who uses AI well and someone who doesn't.
+
+Anyone can generate code. Genuinely, anyone. You can prompt your way to a working feature in ten minutes with zero programming knowledge. That's just a fact in 2026.
+
+But generating _optimal_ code? That requires understanding what optimal even means. And that's where architecture and design patterns come in.
+
+The same feature can be built a hundred different ways. A button that fetches data can be a client component with a useEffect, a server component with async/await, a server action, or a custom hook that abstracts the logic. All four "work." But they are not equal — in performance, in reusability, in how easy they are to test, in how well they scale when the codebase grows.
+
+Knowing which one to choose — and more importantly, being able to tell AI which one to use and why — that's the skill that separates a developer who happens to use AI from a developer who uses AI with intention.
+
+The patterns that matter most to me right now as I'm building:
+
+**Single Responsibility** — every component, every function, every file should do one thing. When something does too much it becomes impossible to test, impossible to reuse, and a nightmare to debug.
+
+**Composition over inheritance** — in React this is basically the whole game. Build small things. Combine them. Don't create one massive component that does everything.
+
+**Container / Presentational** — separate your logic from your UI. In Next.js App Router this maps almost perfectly to Server Components handling data and Client Components handling interactivity. Clean, testable, and your future self will thank you.
+
+**DRY (Don't Repeat Yourself)** — if you're writing the same logic twice, extract it. A custom hook, a utility function, a shared component. Repetition is where bugs breed.
+
+These aren't new ideas. They've existed for decades. But understanding them changes how you prompt AI — instead of asking for code, you're asking for code that follows specific architectural decisions. That's a completely different conversation.
+
+---
+
+## Where I'm at now
+
+I'm a junior developer who graduated, is looking for a job, and is using this time to make sure that when I do land somewhere, I'm not starting from zero.
+
+My portfolio is being built from scratch in Next.js. Not from a template. Not generated wholesale by AI. Every component written by me, reviewed by AI, refined by me again. Every architectural decision made deliberately and documented.
+
+I have a list of projects lined up after this — each one designed to challenge me in a specific way. Some are technically complex. Some are product challenges. Some are just things I find genuinely interesting and want to build.
+
+Because that's the other thing I've realised: the developers who grow fastest aren't the ones who grind the hardest. They're the ones who stay curious. Who build things they actually care about. Who treat every project as a chance to learn something specific, not just add another repo to GitHub.
+
+I'm not trying to be a developer who just writes code. I'm trying to become a developer who understands systems, makes good decisions, leads teams, and produces work that other developers look at and immediately understand.
+
+The gap between junior and senior isn't years of experience. It's the accumulation of good decisions, bad decisions you learned from, and the patterns you built around both.
+
+AI or no AI — that's still the job.
+
+---
+
+_This is the first post in what I'm calling my dev journal — an honest look at the process of going from fresh graduate to developer worth hiring. No filters, no fake hustle, just the real journey._
