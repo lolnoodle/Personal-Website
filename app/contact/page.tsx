@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "motion/react";
+import ContactForm from "@/components/contact-form";
 
 const contacts = [
   {
@@ -119,14 +120,12 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Contact form placeholder — next issue */}
+      {/* Contact form */}
       <div className="px-8 py-10">
         <p className="font-space text-xs text-[var(--accent)] tracking-widest mb-6">
           // drop a message
         </p>
-        <p className="font-space text-xs text-[var(--text)] opacity-30 tracking-widest">
-          Form coming soon.
-        </p>
+        <ContactForm />
       </div>
     </div>
   );
