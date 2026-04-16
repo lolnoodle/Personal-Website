@@ -43,4 +43,37 @@ export const mdxComponents: MDXComponents = {
       {children}
     </pre>
   ),
+  img: ({ src, alt }) => (
+    <div className="relative w-full my-6 border border-[var(--border)] overflow-hidden bg-[var(--background3)]">
+      <img
+        src={src ?? ""}
+        alt={alt ?? ""}
+        className="w-full h-auto object-contain"
+      />
+    </div>
+  ),
+  table: ({ children }) => (
+    <div className="overflow-x-auto mb-8">
+      <table className="w-full border-collapse border border-[var(--border)] font-space text-sm">
+        {children}
+      </table>
+    </div>
+  ),
+  thead: ({ children }) => (
+    <thead className="bg-[var(--background2)]">{children}</thead>
+  ),
+  tbody: ({ children }) => <tbody>{children}</tbody>,
+  tr: ({ children }) => (
+    <tr className="border-b border-[var(--border)]">{children}</tr>
+  ),
+  th: ({ children }) => (
+    <th className="px-4 py-3 text-left text-[var(--accent)] tracking-widest font-space text-sm border-r border-[var(--border)] last:border-r-0">
+      {children}
+    </th>
+  ),
+  td: ({ children }) => (
+    <td className="px-4 py-3 text-[var(--text)] opacity-80 border-r border-[var(--border)] last:border-r-0">
+      {children}
+    </td>
+  ),
 };

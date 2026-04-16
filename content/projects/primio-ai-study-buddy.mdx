@@ -1,0 +1,194 @@
+---
+title: "AI Study Buddy — Primio"
+slug: "primio-ai-study-buddy"
+date: "2025-03-24"
+tags: ["AI Integration", "UX Research", "React Native", "OpenAI", "Internship"]
+role: "AI Research & Development Intern"
+company: "Primio"
+duration: "20 weeks — 2024/2025"
+status: "Completed"
+summary: "Designed and built a voice-driven, hyperpersonalized AI tutor for healthcare workers on Primio's learning platform — from research and concept ideation all the way to a working prototype."
+---
+
+## The Company
+
+Primio is a Dutch EdTech startup building one of the best learning platforms for healthcare workers in the Netherlands. Their app delivers microlearning modules that help care professionals grow in their field — efficiently, on their own time. Their goal: support one million healthcare workers with accessible knowledge, anytime.
+
+When I joined as a graduation intern, Primio was actively exploring how to integrate AI into their app in three directions: **hyperpersonalization**, **AI-driven tutoring**, and **accelerated content generation**. My job was to figure out which of those directions made the most sense — and then build it.
+
+---
+
+## The Problem
+
+Healthcare workers, especially home care assistants (HbH-medewerkers), are one of the most underserved groups when it comes to professional development. A survey I ran with **94 care workers** revealed that:
+
+- **52%** have no time for professional development or further education
+- **37%** spend one hour or less per week on upskilling
+- Many workers have a migration background and varying levels of Dutch language proficiency
+- Digital literacy ranges widely within the target group
+
+At the same time, Primio's existing training content was **non-personalized** — the same lesson for everyone, regardless of experience, language level, or background. There was no in-app support during lessons, and content creation was still largely manual and slow.
+
+The gap was clear: the platform needed to feel like it was designed _for_ each individual user, not a generic crowd.
+
+---
+
+## Research & Discovery
+
+I started broad, then narrowed down through research and stakeholder input.
+
+### Literature Research
+
+I investigated how AI is being applied in healthcare and educational environments. Studies on **Adaptive Learning Platforms (ALPs)** showed that students using GPT-3-driven microlearning apps scored measurably higher than control groups. Research on AI tutoring showed that context-aware feedback leads to better comprehension and engagement — especially for users with limited time.
+
+### User Survey (n=94)
+
+To ground the research in reality, I ran a survey across Primio's user base. The findings confirmed what the literature suggested: workers wanted to learn but lacked time, guidance, and training that matched their actual level.
+
+### Value Proposition Canvas
+
+I translated the research into a Value Proposition Canvas, mapping the pains and gains of both healthcare workers and Primio as a business. This made it easy to communicate findings across disciplines — from UX to sales to backend dev — during team sessions.
+
+### Personas
+
+Based on the survey data and conversations with Primio's customer support team, I created three representative personas. These were cross-validated against Primio's own internal personas to confirm they matched real users. The personas became a key input for the hyperpersonalization design later in the project.
+
+---
+
+## Concept Development
+
+### Crazy 8 Ideation
+
+With research in hand, I ran a **Crazy 8** session to generate concepts fast. The goal wasn't perfection — it was volume and variety. I ended up with four distinct directions:
+
+1. **AI Planner** — Optimizes daily care schedules using integration with external planning software (ONS NEDAP), and recommends relevant Primio trainings based on scheduled clients.
+2. **Career Path Tool** — A questionnaire-driven AI that suggests personalized learning routes within the care sector.
+3. **AI Voicebot — Practical Work Assistant** — A hands-free voice assistant that helps workers in the field, providing step-by-step instructions during emergencies or repetitive task guidance.
+4. **AI Voicebot — Study Buddy** — An AI tutor embedded in the learning flow, adapting lessons and feedback to the user's level and learning style.
+
+### Harris Profile Evaluation
+
+To pick a direction without guesswork, I introduced the **Harris Profile** method to the Primio team — they hadn't used it before. I ran three evaluation sessions with representatives from UX/UI, frontend, sales, and management. Each concept was scored on criteria including: user value, technical feasibility, alignment with Primio's mission, accessibility, and commercial potential.
+
+The sessions surfaced one clear winner: **the AI Study Buddy**. It scored highest on educational value, personalization potential, and mission fit. The combination of AI tutoring and hyperpersonalization also reinforced Primio's existing microlearning model rather than replacing it — a key concern from the sales team.
+
+> The Harris Profile also gave us something beyond just a score: it generated concrete design requirements. Privacy, language accessibility, and trust-building were flagged as non-negotiable early on.
+
+---
+
+## Design & User Testing
+
+### Wireframes → Figma Prototype
+
+I started with **low-fidelity wireframes** to map out the core flow: starting a lesson with the Study Buddy, choosing between voice or text input, receiving AI feedback, and moving to the next card. This kept the focus on interaction logic before any visual design.
+
+Once the flow felt right, I translated it into an **interactive clickable prototype in Figma** — something real users could actually try without needing a live backend.
+
+### User Testing — Zorginstelling Laurens
+
+I tested the prototype with **three HbH-medewerkers** from care organization Laurens. They represented real variation in age, digital experience, and language background — exactly the diversity the product needs to serve.
+
+Each session used a structured **observation form**, tracking per task whether the user completed it independently, showed hesitation, or needed help. Key scenarios tested:
+
+- Starting a lesson with the AI
+- Choosing between voice and text interaction
+- Answering quiz questions and receiving feedback
+- Navigating between lesson cards
+
+**What the tests revealed:**
+
+| Finding                                                                               | Impact                                                              |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Flow was logical after one explanation                                                | Onboarding is essential — but once understood, adoption is fast     |
+| Some terms (e.g. "Samenvatten") caused confusion                                      | All UI text rewritten to **B1 language level**                      |
+| Users wanted to choose their own voice (male/female/neutral)                          | Added to the feature backlog                                        |
+| Multilingual support was requested                                                    | Flagged as a meaningful accessibility feature for future iterations |
+| Hyperpersonalization isn't just about content — tone, pace, and language _are_ the UX | Shaped the entire fourth iteration                                  |
+
+The takeaway that stuck with me most: users weren't afraid of AI at all. What they needed was **transparency and a clear first step**. Once that was provided, confidence followed quickly.
+
+---
+
+## Technical Architecture
+
+### Primio's Stack
+
+Primio's app is built in **React Native** (frontend) with a **NestJS** backend. This modular structure made it straightforward to add the Study Buddy as a new module without restructuring anything core. NestJS was initially unfamiliar — I mapped it against Laravel, which I knew, and got up to speed through documentation and hands-on work with the backend developer.
+
+### AI Stack — Why OpenAI
+
+I evaluated several platforms: Gemini, Coqui.ai, Rasa, Dialogflow, Deepgram, Llama 3, Google TTS. Most covered only one component — either speech or language — and several required Python integrations that clashed with Primio's JavaScript stack.
+
+OpenAI was the clear choice: **Whisper (STT) + GPT-4 (LLM) + TTS** in a single API, with strong multilingual support, detailed documentation, and an existing Primio business account. Crucially, it allowed a fully custom build — no black-box voicebot, full control over what data gets sent, how the model responds, and when personalization kicks in.
+
+### How It Works
+
+```
+User speaks → Whisper transcribes audio → GPT-4 receives [transcription + active lesson card + user profile] → Generates personalized response → TTS converts to natural speech → App plays audio
+```
+
+After each session, the backend stores anonymized metadata (quiz results, lesson progress) and updates the user's learning profile. This feeds back into the next session, making the AI progressively smarter about that specific user.
+
+### Challenges Solved
+
+**Performance:** Early versions sent the entire lesson to GPT-4 on every message → token limit errors and slow responses. Fixed by sending only the **active lesson card** per request. Response times dropped significantly.
+
+**Speech Recognition:** Whisper was occasionally interpreting Dutch as Russian or Korean. Fixed by explicitly passing a language parameter in the API call.
+
+**Stateless LLM:** GPT-4 has no memory between calls. Solved by persisting session context server-side and injecting it into every request — so the AI always knows where the user is in their learning journey.
+
+**Cost Scaling:** API costs during testing peaked around €50/month before optimization. Reduced by minimizing token payload per call. Future options include caching frequent Q&A pairs and routing simple queries through a lighter local model.
+
+---
+
+## Iterations
+
+### Iteration 1 — Proof of Concept
+
+Built a minimal React + Express app with two routes: `/transcribe` (Whisper) and `/synthesize` (TTS). Stress-tested Whisper with mumbled American hip-hop audio and a Portuguese speech fragment. Both passed. The transcription quality and natural voice output proved OpenAI was the right foundation.
+
+### Iteration 2 — App Integration
+
+Integrated the Study Buddy into Primio's actual lesson flow. Built a new backend endpoint (`getAggregatedCardsForLearningPath`) that fetches the full lesson structure in a compact format, reducing API calls. Added the start button, the voice/text choice screen, and live AI responses during lessons.
+
+### Iteration 3 — UX Optimization
+
+Resolved audio overlap (users hitting "next" before the AI finished speaking) using a **flow state** on the frontend to track exactly where in the lesson the user is. Differentiated behavior between knowledge cards (explanation, open questions) and quiz cards (answer + feedback). Collaborated with Primio's UX/UI designer to make the voice button more prominent and reduce cognitive load.
+
+### Iteration 4 — Hyperpersonalization
+
+This was the most important phase. Earlier iterations nailed the AI tutor part, but hyperpersonalization wasn't visible enough. Together with the dev team, I implemented **three selectable personas**, each representing a real user archetype from the research:
+
+- **Maria (45)** — Experienced care worker. Receives in-depth answers with medical context and practical examples.
+- **Mohammed (28)** — Ambitious, Dutch as a second language. Gets structured, step-by-step guidance.
+- **Fatima (35)** — New to care, still building language confidence. Receives simple, reassuring B1-level responses with repetition.
+
+Same lesson content, completely different experience. The AI adjusts tone, vocabulary, depth of explanation, and feedback style based on who's learning. The difference was immediately visible in testing.
+
+---
+
+## Results
+
+The final prototype demonstrates a working, voice-driven AI tutor that:
+
+- Adapts lesson content, tone, and feedback to the individual user profile
+- Supports both voice and text input
+- Integrates directly into Primio's existing lesson flow
+- Remains AVG-compliant (no personally identifiable audio stored)
+- Can scale cost-effectively with further optimization
+
+The Primio team validated the outcome as a strong foundation for the next phase of their AI roadmap. The concept was designed to function as a **premium add-on** — accessible to healthcare organizations that invest in staff development, while keeping Primio's core features available to all users.
+
+---
+
+## What I Learned
+
+This project was the first time I worked across the full product lifecycle: research → concept → design → user testing → technical implementation → iteration. A few things I'll carry forward:
+
+**Research shapes everything.** The personas and survey data I collected in week two were still driving design decisions in week eighteen. Starting with real users isn't optional.
+
+**Methods are tools, not rituals.** I introduced the Harris Profile to Primio because it fit the decision we needed to make — not because it was in a textbook. The team appreciated the structure, but what mattered was the conversation it created.
+
+**Hyperpersonalization is deeper than content.** The biggest insight from user testing: how something is said matters as much as what is said. Tone, reading level, pace, and even voice selection are all part of the user experience.
+
+**Build, break, fix, repeat.** The token limit crash in iteration 2, the language misidentification bug, the audio overlap — none of these were predicted. They were found by actually shipping and testing. That's the only way.

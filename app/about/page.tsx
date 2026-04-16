@@ -37,7 +37,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-dvh bg-[var(--background)] flex flex-col">
       <div className="px-8 pt-10 pb-8 border-b border-[var(--border)] overflow-hidden">
-        <p className="font-space text-s text-[var(--accent)] tracking-widest mb-3">
+        <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-3">
           // who i am
         </p>
         <motion.div
@@ -67,7 +67,7 @@ export default function AboutPage() {
       </motion.div>
 
       <div className="px-8 py-10 border-b border-[var(--border)]">
-        <p className="font-space text-s text-[var(--accent)] tracking-widest mb-8">
+        <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-8">
           // tech stack
         </p>
         <div className="flex flex-col gap-6 max-w-xl">
@@ -95,12 +95,11 @@ export default function AboutPage() {
       </div>
 
       <div className="px-8 py-10">
-        <p className="font-space text-s text-[var(--accent)] tracking-widest mb-8">
+        <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-8">
           // beyond the code
         </p>
 
         <div className="flex gap-10 items-start">
-          {/* Image */}
           <div className="relative w-64 h-64 border border-[var(--border)] flex-shrink-0 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
@@ -122,7 +121,6 @@ export default function AboutPage() {
             </AnimatePresence>
           </div>
 
-          {/* Labels + description */}
           <div className="flex flex-col gap-4 pt-1 flex-1">
             <div className="flex gap-6 flex-wrap">
               {interests.map((interest, i) => (
@@ -147,7 +145,7 @@ export default function AboutPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.3 }}
-                className="font-inter text-sm leading-relaxed text-[var(--text)] opacity-60 max-w-sm"
+                className="font-inter text-smm leading-relaxed text-[var(--text)] opacity-60 max-w-sm"
               >
                 {interests[currentInterest].description}
               </motion.p>

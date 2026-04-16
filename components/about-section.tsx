@@ -11,14 +11,12 @@ export default function AboutSection() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="m-2 border border-[var(--border)] bg-[var(--background2)]"
     >
-      {/* Section header */}
       <div className="border-b border-[var(--border)] px-6 py-3">
         <p className="text-3xl text-[var(--accent)] font-bebas tracking-widest">
           About Me
         </p>
       </div>
 
-      {/* Content */}
       <div className="px-6 py-8 flex flex-col gap-6 max-w-3xl">
         <p className="font-inter text-lg leading-relaxed text-[var(--text)]">
           I&apos;m{" "}

@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "@/data/projects";
@@ -25,27 +26,23 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <div className="min-h-dvh bg-[var(--background)]">
-
-      {/* Back link */}
       <div className="px-8 pt-8">
         <Link
           href="/projects"
-          className="font-space text-xs text-[var(--accent)] tracking-widest hover:opacity-60 transition-opacity"
+          className="font-space text-sm text-[var(--accent)] tracking-widest hover:opacity-60 transition-opacity"
         >
           ← Back to projects
         </Link>
       </div>
 
-      {/* Project header */}
       <div className="px-8 pt-6 pb-8 border-b border-[var(--border)]">
-        <p className="font-space text-xs text-[var(--accent)] tracking-widest mb-2">
+        <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-2">
           // {project.year}
         </p>
         <h1 className="font-bebas text-7xl tracking-widest text-[var(--text)] leading-none mb-4">
           {project.title}
         </h1>
 
-        {/* Tech tags */}
         <div className="flex flex-wrap gap-2 mb-6">
           {project.tags.map((tag) => (
             <span
@@ -57,7 +54,6 @@ export default async function ProjectPage({ params }: Props) {
           ))}
         </div>
 
-        {/* Links */}
         {project.github && (
           <a
             href={project.github}
@@ -70,11 +66,13 @@ export default async function ProjectPage({ params }: Props) {
         )}
       </div>
 
-      {/* MDX content */}
-      <div className="px-8 py-12 max-w-3xl">
-        <MDXRemote source={content} components={mdxComponents} />
+      <div className="px-8 py-12 max-w-5xl">
+        <MDXRemote
+          source={content}
+          components={mdxComponents}
+          options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+        />
       </div>
-
     </div>
   );
 }

@@ -14,7 +14,6 @@ export default function VinylCard({ project }: { project: Project }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* ── SLEEVE (flips on hover) ── */}
       <div
         className="relative w-56 h-56 flex-shrink-0"
         style={{ perspective: "1000px" }}
@@ -25,7 +24,6 @@ export default function VinylCard({ project }: { project: Project }) {
           className="w-full h-full relative"
           style={{ transformStyle: "preserve-3d" }}
         >
-          {/* FRONT — album cover */}
           <div
             className="absolute inset-0 overflow-hidden"
             style={{ backfaceVisibility: "hidden" }}
@@ -48,13 +46,12 @@ export default function VinylCard({ project }: { project: Project }) {
               <p className="font-bebas text-base tracking-widest text-white leading-none">
                 {project.title}
               </p>
-              <p className="font-space text-[9px] text-white/40 tracking-widest mt-0.5">
+              <p className="font-space text-xs text-white/40 tracking-widest mt-0.5">
                 {project.year}
               </p>
             </div>
           </div>
 
-          {/* BACK — tracklist */}
           <div
             className="absolute inset-0 bg-[var(--background2)] p-4 flex flex-col justify-between border-r border-[var(--border)]"
             style={{
@@ -63,14 +60,14 @@ export default function VinylCard({ project }: { project: Project }) {
             }}
           >
             <div>
-              <p className="font-space text-[9px] text-[var(--accent)] tracking-widest mb-3">
+              <p className="font-space text-xs text-[var(--accent)] tracking-widest mb-3">
                 // tracklist
               </p>
               <div className="flex flex-col gap-1.5">
                 {project.tags.map((tag, i) => (
                   <span
                     key={tag}
-                    className={`font-space text-[10px] tracking-widest ${
+                    className={`font-space text-xs tracking-widest ${
                       i === 0
                         ? "text-[var(--accent)]"
                         : "text-[var(--text)] opacity-50"
@@ -81,14 +78,13 @@ export default function VinylCard({ project }: { project: Project }) {
                 ))}
               </div>
             </div>
-            <p className="font-space text-[9px] text-[var(--text)] opacity-30 tracking-widest">
+            <p className="font-space text-xs text-[var(--text)] opacity-30 tracking-widest">
               {project.year}
             </p>
           </div>
         </motion.div>
       </div>
 
-      {/* ── CD ZONE (animates in on hover, pushes description) ── */}
       <AnimatePresence>
         {hovered && (
           <motion.div
@@ -123,17 +119,16 @@ export default function VinylCard({ project }: { project: Project }) {
         )}
       </AnimatePresence>
 
-      {/* ── DESCRIPTION (always visible, gets pushed by CD zone) ── */}
       <div className="flex-1 p-5 flex flex-col justify-between bg-[var(--background2)] min-w-0">
         <div>
           <h2 className="font-bebas text-2xl tracking-widest text-[var(--accent)] leading-none mb-2">
             {project.title}
           </h2>
-          <p className="font-space text-[11px] leading-relaxed text-[var(--text)] opacity-60">
+          <p className="font-space text-xs leading-relaxed text-[var(--text)] opacity-60">
             {project.description}
           </p>
         </div>
-        <span className="font-space text-[10px] text-[var(--accent)] opacity-30 tracking-widest">
+        <span className="font-space text-xs text-[var(--accent)] opacity-30 tracking-widest">
           {project.year}
         </span>
       </div>
