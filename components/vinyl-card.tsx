@@ -33,6 +33,7 @@ export default function VinylCard({ project }: { project: Project }) {
                 src={project.image}
                 alt={project.title}
                 fill
+                sizes="224px"
                 className="object-cover"
               />
             ) : (

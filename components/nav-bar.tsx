@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import Image from "next/image";
+import ThemeToggle from "@/components/theme-toggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -43,7 +44,9 @@ export default function NavBar() {
         />
       </motion.div>
 
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-4">
+        <ThemeToggle />
+        <div className="flex items-center gap-1">
         {navLinks.map((nav) => (
           <Link
             key={nav.href}
@@ -57,6 +60,7 @@ export default function NavBar() {
             {nav.label}
           </Link>
         ))}
+        </div>
       </div>
     </motion.nav>
   );

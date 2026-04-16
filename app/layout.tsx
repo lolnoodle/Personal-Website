@@ -37,7 +37,14 @@ export default function RootLayout({
     <html
       lang="en"
       className={` ${bebasNeue.variable} ${spaceMono.variable} ${inter.variable} antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `
+          const stored = localStorage.getItem('theme');
+          if (stored) document.documentElement.setAttribute('data-theme', stored);
+        `}} />
+      </head>
       <body>
         <CustomCursor></CustomCursor>
         <NavBar></NavBar>
