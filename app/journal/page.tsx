@@ -18,7 +18,7 @@ const itemVariants = {
 export default function JournalPage() {
   return (
     <div className="min-h-dvh bg-[var(--background)] flex flex-col">
-      <div className="px-8 pt-10 pb-8 border-b border-[var(--border)]">
+      <div className="px-4 md:px-8 pt-10 pb-8 border-b border-[var(--border)]">
         <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-3">
           // my dev journey
         </p>
@@ -41,7 +41,7 @@ export default function JournalPage() {
           <motion.div key={journal.slug} variants={itemVariants}>
             <Link
               href={`/journal/${journal.slug}`}
-              className="flex gap-6 px-8 py-6 border-b border-[var(--border)] hover:bg-[var(--background2)] transition-colors duration-200 group"
+              className="flex gap-6 px-4 md:px-8 py-6 border-b border-[var(--border)] hover:bg-[var(--background2)] transition-colors duration-200 group"
             >
               <span className="font-bebas text-5xl text-[var(--accent)] opacity-35 leading-none w-12 flex-shrink-0 group-hover:opacity-100 transition-opacity duration-200">
                 {String(journal.number).padStart(2, "0")}

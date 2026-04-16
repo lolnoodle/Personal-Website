@@ -36,7 +36,7 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-dvh bg-[var(--background)] flex flex-col">
-      <div className="px-8 pt-10 pb-8 border-b border-[var(--border)] overflow-hidden">
+      <div className="px-4 md:px-8 pt-10 pb-8 border-b border-[var(--border)] overflow-hidden">
         <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-3">
           // who i am
         </p>
@@ -56,7 +56,7 @@ export default function AboutPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.5 }}
-        className="px-8 py-10 border-b border-[var(--border)] w-full"
+        className="px-4 md:px-8 py-10 border-b border-[var(--border)] w-full"
       >
         <p className="font-inter text-lg leading-relaxed text-[var(--text)] opacity-80 max-w-3xl mx-auto text-center">
           25 year old developer from Rotterdam. Fresh off a CMGT degree at
@@ -66,7 +66,7 @@ export default function AboutPage() {
         </p>
       </motion.div>
 
-      <div className="px-8 py-10 border-b border-[var(--border)]">
+      <div className="px-4 md:px-8 py-10 border-b border-[var(--border)]">
         <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-8">
           // tech stack
         </p>
@@ -94,13 +94,13 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="px-8 py-10">
+      <div className="px-4 md:px-8 py-10">
         <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-8">
           // beyond the code
         </p>
 
-        <div className="flex gap-10 items-start">
-          <div className="relative w-64 h-64 border border-[var(--border)] flex-shrink-0 overflow-hidden">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-10 items-start">
+          <div className="relative w-full md:w-64 h-64 border border-[var(--border)] flex-shrink-0 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentInterest}

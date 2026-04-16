@@ -125,7 +125,7 @@ export default function VinylCard({ project }: { project: Project }) {
           <h2 className="font-bebas text-2xl tracking-widest text-[var(--accent)] leading-none mb-2">
             {project.title}
           </h2>
-          <p className="font-space text-xs leading-relaxed text-[var(--text)] opacity-60">
+          <p className="font-space text-xs leading-relaxed text-[var(--text)] opacity-60 line-clamp-3">
             {project.description}
           </p>
         </div>

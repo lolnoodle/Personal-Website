@@ -32,7 +32,7 @@ export default function HeroSection() {
   };
 
   return (
-    <div className="px-8 pt-10 pb-10 border-b border-[var(--border)]">
+    <div className="px-4 md:px-8 pt-10 pb-10 border-b border-[var(--border)]">
       <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-6">
         // hello world
       </p>

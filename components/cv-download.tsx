@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 
 export default function CvDownload() {
   return (
-    <div className="px-8 py-10 flex flex-col items-center">
+    <div className="px-4 md:px-8 py-10 flex flex-col items-center">
       <div className="w-full max-w-2xl">
       <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-6">
         // need my resume?

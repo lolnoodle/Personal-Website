@@ -59,7 +59,7 @@ export default function ProjectSection() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -24 }}
           transition={{ duration: 0.35, ease: "easeInOut" }}
-          className="grid grid-cols-[280px_1fr] gap-6 p-6"
+          className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 p-6"
         >
           <div className="relative aspect-video border border-[var(--border)] overflow-hidden bg-[var(--background3)]">
             <Image

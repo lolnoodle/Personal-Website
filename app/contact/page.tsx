@@ -69,7 +69,7 @@ const contacts = [
 export default function ContactPage() {
   return (
     <div className="min-h-dvh bg-[var(--background)] flex flex-col">
-      <div className="px-8 pt-10 pb-8 border-b border-[var(--border)]">
+      <div className="px-4 md:px-8 pt-10 pb-8 border-b border-[var(--border)]">
         <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-3">
           // let&apos;s talk
         </p>
@@ -81,11 +81,11 @@ export default function ContactPage() {
         </p>
       </div>
 
-      <div className="px-8 py-10 border-b border-[var(--border)]">
+      <div className="px-4 md:px-8 py-10 border-b border-[var(--border)]">
         <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-6">
           // find me here
         </p>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {contacts.map((contact) => (
             <motion.a
               key={contact.label}
@@ -119,7 +119,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className="px-8 py-10 border-b border-[var(--border)] flex flex-col items-center">
+      <div className="px-4 md:px-8 py-10 border-b border-[var(--border)] flex flex-col items-center">
         <div className="w-full max-w-2xl">
           <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-6">
             // drop a message
