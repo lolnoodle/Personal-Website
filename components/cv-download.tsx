@@ -3,8 +3,9 @@ import { motion } from "motion/react";
 
 export default function CvDownload() {
   return (
-    <div className="px-8 py-10">
-      <p className="font-space text-xs text-[var(--accent)] tracking-widest mb-6">
+    <div className="px-8 py-10 flex flex-col items-center">
+      <div className="w-full max-w-2xl">
+      <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-6">
         // need my resume?
       </p>
       <motion.a
@@ -31,9 +32,10 @@ export default function CvDownload() {
         </svg>
         download cv
       </motion.a>
-      <p className="font-space text-[10px] text-[var(--text)] opacity-30 tracking-widest mt-3">
+      <p className="font-space text-xs text-[var(--text)] opacity-30 tracking-widest mt-3">
         pdf · last updated apr 2026
       </p>
+    </div>
     </div>
   );
 }

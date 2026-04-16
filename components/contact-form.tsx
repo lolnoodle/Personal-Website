@@ -27,10 +27,10 @@ export default function ContactForm() {
   }
 
   const inputClass =
-    "w-full bg-[var(--background2)] border border-[var(--border)] text-[var(--text)] font-space text-xs tracking-widest px-4 py-3 outline-none focus:border-[var(--accent)] transition-colors duration-200 placeholder:text-[var(--text)] placeholder:opacity-30";
+    "w-full bg-[var(--background2)] border border-[var(--border)] text-[var(--text)] font-space text-sm tracking-widest px-4 py-3 outline-none focus:border-[var(--accent)] transition-colors duration-200 placeholder:text-[var(--text)] placeholder:opacity-30";
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-xl">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
       <div className="grid grid-cols-2 gap-4">
         <input
           type="text"
@@ -77,7 +77,7 @@ export default function ContactForm() {
           <motion.p
             initial={{ opacity: 0, x: -8 }}
             animate={{ opacity: 1, x: 0 }}
-            className="font-space text-xs text-[var(--accent)] tracking-widest"
+            className="font-space text-sm text-[var(--accent)] tracking-widest"
           >
             // message sent. i&apos;ll be in touch.
           </motion.p>
@@ -87,7 +87,7 @@ export default function ContactForm() {
           <motion.p
             initial={{ opacity: 0, x: -8 }}
             animate={{ opacity: 1, x: 0 }}
-            className="font-space text-xs text-red-400 tracking-widest"
+            className="font-space text-sm text-red-400 tracking-widest"
           >
             // something went wrong. try again.
           </motion.p>

@@ -22,14 +22,20 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "Project Two",
-    slug: "project-two",
+    title: "AI Study Buddy — Primio",
+    slug: "primio-ai-study-buddy",
     description:
-      "Another project description. What was the challenge, what did you build.",
+      "Designed and built a voice-driven, hyperpersonalized AI tutor for healthcare workers on Primio's learning platform — from research and concept ideation all the way to a working prototype.",
     year: "2025",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
+    tags: [
+      "AI Integration",
+      "UX Research",
+      "React Native",
+      "OpenAI",
+      "Internship",
+    ],
     github: "https://github.com/lolnoodle",
-    image: "/logo.png",
+    image: "/primio.webp",
     featured: true,
   },
   {

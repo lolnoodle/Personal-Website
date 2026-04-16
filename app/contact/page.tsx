@@ -70,19 +70,19 @@ export default function ContactPage() {
   return (
     <div className="min-h-dvh bg-[var(--background)] flex flex-col">
       <div className="px-8 pt-10 pb-8 border-b border-[var(--border)]">
-        <p className="font-space text-xs text-[var(--accent)] tracking-widest mb-3">
+        <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-3">
           // let&apos;s talk
         </p>
         <h1 className="font-bebas text-7xl tracking-widest text-[var(--text)] leading-none mb-3">
           Contact
         </h1>
-        <p className="font-space text-xs text-[var(--text)] opacity-40 tracking-widest">
+        <p className="font-space text-sm text-[var(--text)] opacity-40 tracking-widest">
           got something to say? let&apos;s talk.
         </p>
       </div>
 
       <div className="px-8 py-10 border-b border-[var(--border)]">
-        <p className="font-space text-xs text-[var(--accent)] tracking-widest mb-6">
+        <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-6">
           // find me here
         </p>
         <div className="grid grid-cols-3 gap-4">
@@ -107,11 +107,11 @@ export default function ContactPage() {
                 <p className="font-bebas text-xl tracking-widest text-[var(--text)] leading-none mb-1 group-hover:text-[var(--accent)] transition-colors duration-200">
                   {contact.label}
                 </p>
-                <p className="font-space text-[10px] text-[var(--text)] opacity-40 tracking-widest">
+                <p className="font-space text-xs text-[var(--text)] opacity-40 tracking-widest">
                   {contact.description}
                 </p>
               </div>
-              <p className="font-space text-xs text-[var(--accent)] tracking-widest mt-auto">
+              <p className="font-space text-sm text-[var(--accent)] tracking-widest mt-auto">
                 {contact.value}
               </p>
             </motion.a>
@@ -119,11 +119,13 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className="px-8 py-10 border-b border-[var(--border)]">
-        <p className="font-space text-xs text-[var(--accent)] tracking-widest mb-6">
-          // drop a message
-        </p>
-        <ContactForm />
+      <div className="px-8 py-10 border-b border-[var(--border)] flex flex-col items-center">
+        <div className="w-full max-w-2xl">
+          <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-6">
+            // drop a message
+          </p>
+          <ContactForm />
+        </div>
       </div>
 
       <CvDownload />

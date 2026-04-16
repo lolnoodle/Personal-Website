@@ -69,7 +69,7 @@ export default function Footer() {
         <div className="flex items-center gap-4">
           <Link
             href="/contact"
-            className="text-xs tracking-widest font-[var(--font-tags)] text-[var(--text)] hover:text-[var(--accent)] transition-colors duration-200"
+            className="text-sm tracking-widest font-space text-[var(--text)] hover:text-[var(--accent)] transition-colors duration-200"
           >
             Contact
           </Link>
@@ -88,7 +88,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <p className="text-center text-xs tracking-widest font-[var(--font-tags)] text-[var(--text)] opacity-40 mt-3">
+      <p className="text-center text-sm tracking-widest font-space text-[var(--text)] opacity-40 mt-3">
         © 2026 Issam Fissoune
       </p>
     </motion.footer>

@@ -4,25 +4,9 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 
-// Later: this moves to data/projects.ts and gets passed as props
-const projects = [
-  {
-    title: "Project Name One",
-    description:
-      "A short punchy description of what the project does and the problem it solves. Keep it 2-3 sentences max.",
-    image: "/logo.png",
-    tags: ["React Native", "Firebase", "Expo"],
-    href: "/projects/project-one",
-  },
-  {
-    title: "Project Name Two",
-    description:
-      "Another project description. What was the challenge, what did you build, what was the outcome.",
-    image: "/logo.png",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
-    href: "/projects/project-two",
-  },
-];
+import { projects as allProjects } from "@/data/projects";
+
+const projects = allProjects.filter((p) => p.featured);
 
 export default function ProjectSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -49,12 +33,10 @@ export default function ProjectSection() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Section header */}
       <div className="border-b border-[var(--border)] px-6 py-3 flex items-center justify-between">
         <p className="text-3xl text-[var(--accent)] font-bebas tracking-widest">
           Featured Projects
         </p>
-        {/* Carousel dots */}
         <div className="flex gap-2">
           {projects.map((_, i) => (
             <button
@@ -70,7 +52,6 @@ export default function ProjectSection() {
         </div>
       </div>
 
-      {/* Card */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
@@ -80,17 +61,15 @@ export default function ProjectSection() {
           transition={{ duration: 0.35, ease: "easeInOut" }}
           className="grid grid-cols-[280px_1fr] gap-6 p-6"
         >
-          {/* Image */}
-          <div className="relative aspect-video border border-[var(--border)] overflow-hidden">
+          <div className="relative aspect-video border border-[var(--border)] overflow-hidden bg-[var(--background3)]">
             <Image
               src={project.image}
               alt={project.title}
               fill
-              className="object-cover"
+              className="object-contain"
             />
           </div>
 
-          {/* Content */}
           <div className="flex flex-col justify-between">
             <div>
               <h2 className="font-bebas text-3xl text-[var(--text)] tracking-wide mb-2">
@@ -102,7 +81,6 @@ export default function ProjectSection() {
             </div>
 
             <div className="flex items-center justify-between mt-4">
-              {/* Tech tags */}
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
@@ -114,9 +92,8 @@ export default function ProjectSection() {
                 ))}
               </div>
 
-              {/* CTA */}
               <Link
-                href={project.href}
+                href={`/projects/${project.slug}`}
                 className="font-bebas text-xl tracking-widest px-4 py-1.5 bg-[var(--accent)] text-black hover:opacity-80 transition-opacity"
               >
                 SEE MORE

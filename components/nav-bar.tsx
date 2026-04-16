@@ -48,7 +48,7 @@ export default function NavBar() {
           <Link
             key={nav.href}
             href={nav.href}
-            className={`px-4 py-1.5 text-xs tracking-widest font-[var(--font-tags)] transition-colors duration-200 ${
+            className={`px-4 py-1.5 text-sm tracking-widest font-space transition-colors duration-200 ${
               pathname === nav.href
                 ? "bg-[var(--accent)] text-black"
                 : "text-[var(--text)] hover:text-[var(--accent)]"
