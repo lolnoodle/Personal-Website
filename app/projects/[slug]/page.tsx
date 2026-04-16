@@ -26,7 +26,7 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <div className="min-h-dvh bg-[var(--background)]">
-      <div className="px-8 pt-8">
+      <div className="px-4 md:px-8 pt-8">
         <Link
           href="/projects"
           className="font-space text-sm text-[var(--accent)] tracking-widest hover:opacity-60 transition-opacity"
@@ -35,7 +35,7 @@ export default async function ProjectPage({ params }: Props) {
         </Link>
       </div>
 
-      <div className="px-8 pt-6 pb-8 border-b border-[var(--border)]">
+      <div className="px-4 md:px-8 pt-6 pb-8 border-b border-[var(--border)]">
         <p className="font-space text-sm text-[var(--accent)] tracking-widest mb-2">
           // {project.year}
         </p>
@@ -66,7 +66,7 @@ export default async function ProjectPage({ params }: Props) {
         )}
       </div>
 
-      <div className="px-8 py-12 max-w-5xl">
+      <div className="px-4 md:px-8 py-12 max-w-5xl">
         <MDXRemote
           source={content}
           components={mdxComponents}
