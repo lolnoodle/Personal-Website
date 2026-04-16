@@ -66,6 +66,8 @@ export default function ProjectSection() {
               src={project.image}
               alt={project.title}
               fill
+              sizes="280px"
+              loading="eager"
               className="object-contain"
             />
           </div>
