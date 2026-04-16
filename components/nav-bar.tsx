@@ -32,8 +32,20 @@ export default function NavBar() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.35, duration: 0.3, ease: "easeOut" }}
         >
-          <Image src="/logo.png" alt="IF" width={60} height={60} className="hidden dark:block" />
-          <Image src="/logo-light.png" alt="IF" width={60} height={60} className="block dark:hidden" />
+          <Image
+            src="/logo.png"
+            alt="IF"
+            width={60}
+            height={60}
+            className="hidden dark:block"
+          />
+          <Image
+            src="/logo-light.png"
+            alt="IF"
+            width={60}
+            height={60}
+            className="block dark:hidden"
+          />
         </motion.div>
 
         {/* Desktop nav */}
@@ -65,12 +77,32 @@ export default function NavBar() {
             className="text-[var(--text)] hover:text-[var(--accent)] transition-colors duration-200"
           >
             {menuOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <line x1="3" y1="12" x2="21" y2="12" />
                 <line x1="3" y1="18" x2="21" y2="18" />
