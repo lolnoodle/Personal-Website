@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "motion/react";
 import ContactForm from "@/components/contact-form";
+import CvDownload from "@/components/cv-download";
 
 const contacts = [
   {
@@ -68,7 +69,6 @@ const contacts = [
 export default function ContactPage() {
   return (
     <div className="min-h-dvh bg-[var(--background)] flex flex-col">
-      {/* Header */}
       <div className="px-8 pt-10 pb-8 border-b border-[var(--border)]">
         <p className="font-space text-xs text-[var(--accent)] tracking-widest mb-3">
           // let&apos;s talk
@@ -81,7 +81,6 @@ export default function ContactPage() {
         </p>
       </div>
 
-      {/* Social tiles */}
       <div className="px-8 py-10 border-b border-[var(--border)]">
         <p className="font-space text-xs text-[var(--accent)] tracking-widest mb-6">
           // find me here
@@ -120,13 +119,14 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Contact form */}
-      <div className="px-8 py-10">
+      <div className="px-8 py-10 border-b border-[var(--border)]">
         <p className="font-space text-xs text-[var(--accent)] tracking-widest mb-6">
           // drop a message
         </p>
         <ContactForm />
       </div>
+
+      <CvDownload />
     </div>
   );
 }
