@@ -7,6 +7,7 @@ export type Project = {
   github?: string;
   image: string;
   featured: boolean;
+  comingSoon?: boolean;
 };
 
 export const projects: Project[] = [
@@ -39,23 +40,13 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "Project Three",
-    slug: "project-three",
-    description: "Third project description. The outcome and what you learned.",
-    year: "2024",
-    tags: ["React", "Node.js", "PostgreSQL"],
-    github: "https://github.com/lolnoodle",
-    image: "/logo.png",
+    title: "Coming Soon",
+    slug: "coming-soon",
+    description: "Something is in the works",
+    year: "",
+    tags: [],
+    image: "",
     featured: false,
-  },
-  {
-    title: "Project Four",
-    slug: "project-four",
-    description: "Fourth project. Keep adding your real projects as you go.",
-    year: "2024",
-    tags: ["Vue.js", "Express", "MongoDB"],
-    github: "https://github.com/lolnoodle",
-    image: "/logo.png",
-    featured: false,
+    comingSoon: true,
   },
 ];

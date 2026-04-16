@@ -4,9 +4,12 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Project } from "@/data/projects";
+import VinylCardLocked from "@/components/vinyl-card-locked";
 
 export default function VinylCard({ project }: { project: Project }) {
   const [hovered, setHovered] = useState(false);
+
+  if (project.comingSoon) return <VinylCardLocked />;
 
   return (
     <div
