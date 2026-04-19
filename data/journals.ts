@@ -20,4 +20,14 @@ export const journals: Journal[] = [
     readTime: "6 min read",
     date: "Apr 16th 2026",
   },
+  {
+    number: 2,
+    title: "Building my portfolio from scratch",
+    slug: "personal-website",
+    description:
+      "My thoughts and process while building my personal website and what I learnt during the process",
+    tags: ["Next.js", "Portfolio", "Planning", "Design", "Junior Dev"],
+    readTime: "6 min read",
+    date: "Apr 17th 2026",
+  },
 ];

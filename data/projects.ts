@@ -15,7 +15,7 @@ export const projects: Project[] = [
     title: "Ballieue",
     slug: "ballieue",
     description:
-      "A short punchy description of what the project does and the problem it solves.",
+      "From classroom concept to real product — how a five person team built a gamified street football app to get Rotterdam kids off their screens and onto the pitch.",
     year: "2025",
     tags: ["React Native", "Firebase", "Expo"],
     github: "https://github.com/lolnoodle",

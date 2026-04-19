@@ -22,7 +22,7 @@ export default function AboutSection() {
           I&apos;m{" "}
           <span className="text-[var(--accent)] font-semibold">Issam</span> — a{" "}
           <span className="text-[var(--accent)] font-semibold">
-            25 year old developer
+            26 year old developer
           </span>{" "}
           from{" "}
           <span className="text-[var(--accent)] font-semibold">Rotterdam</span>,
