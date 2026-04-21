@@ -115,6 +115,7 @@ export default function VinylCard({ project }: { project: Project }) {
 
             <Link
               href={`/projects/${project.slug}`}
+              aria-label={`See more about ${project.title}`}
               className="font-bebas text-sm tracking-widest px-3 py-1 bg-[var(--accent)] text-black hover:opacity-80 transition-opacity whitespace-nowrap"
             >
               PLAY ME ▶

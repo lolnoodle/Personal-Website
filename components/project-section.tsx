@@ -96,6 +96,7 @@ export default function ProjectSection() {
 
               <Link
                 href={`/projects/${project.slug}`}
+                aria-label={`See more about ${project.title}`}
                 className="font-bebas text-xl tracking-widest px-4 py-1.5 bg-[var(--accent)] text-black hover:opacity-80 transition-opacity"
               >
                 SEE MORE

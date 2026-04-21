@@ -55,6 +55,7 @@ export default function Footer() {
             alt="IF"
             width={70}
             height={70}
+            style={{ width: 70, height: "auto" }}
             className="hidden dark:block"
           />
           <Image
@@ -62,6 +63,7 @@ export default function Footer() {
             alt="IF"
             width={70}
             height={70}
+            style={{ width: 70, height: "auto" }}
             className="block dark:hidden"
           />
         </motion.div>

@@ -37,6 +37,7 @@ export default function NavBar() {
             alt="IF"
             width={60}
             height={60}
+            style={{ width: 60, height: "auto" }}
             className="hidden dark:block"
           />
           <Image
@@ -44,6 +45,7 @@ export default function NavBar() {
             alt="IF"
             width={60}
             height={60}
+            style={{ width: 60, height: "auto" }}
             className="block dark:hidden"
           />
         </motion.div>

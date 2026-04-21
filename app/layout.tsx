@@ -24,8 +24,33 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Issam's Personal website",
-  description: "My professional world",
+  metadataBase: new URL("https://issam-fissoune.vercel.app"),
+  title: "Issam Fissoune | Developer",
+  description:
+    "Portfolio of Issam Fissoune — developer from Rotterdam specialising in React, React Native and Next.js. Open to new opportunities.",
+  openGraph: {
+    title: "Issam Fissoune | Developer",
+    description:
+      "Portfolio of Issam Fissoune — developer from Rotterdam specialising in React, React Native and Next.js. Open to new opportunities.",
+    url: "https://issam-fissoune.vercel.app",
+    siteName: "Issam Fissoune",
+    images: [
+      {
+        url: "/logo.png",
+        width: 800,
+        height: 800,
+        alt: "Issam Fissoune",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Issam Fissoune | Developer",
+    description:
+      "Portfolio of Issam Fissoune — developer from Rotterdam specialising in React, React Native and Next.js.",
+    images: ["/logo.png"],
+  },
 };
 
 export default function RootLayout({
@@ -40,10 +65,14 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
           const stored = localStorage.getItem('theme');
           if (stored) document.documentElement.setAttribute('data-theme', stored);
-        `}} />
+        `,
+          }}
+        />
       </head>
       <body>
         <CustomCursor></CustomCursor>
