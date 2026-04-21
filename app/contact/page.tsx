@@ -42,7 +42,7 @@ const contacts = [
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 const tileVariants = {
@@ -50,7 +50,7 @@ const tileVariants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: "easeOut", delay: i * 0.1 },
+    transition: { duration: 0.4, ease: "easeOut" as const, delay: i * 0.1 },
   }),
 };
 
