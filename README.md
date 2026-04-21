@@ -102,7 +102,7 @@ Open [http://localhost:3000](http://localhost:3000) and you're in.
 
 If you like what you see — or have feedback, an opportunity, or just want to talk code:
 
-- 🌐 [yourdomain.com](https://yourdomain.com)
+- 🌐 [yourdomain.com](https://issamfissoune.nl)
 - 💼 [LinkedIn](https://www.linkedin.com/in/issam-fissoune-227828215/)
 - 🐙 [GitHub](https://github.com/lolnoodle)
 - 📧 issamf2804@gmail.com
