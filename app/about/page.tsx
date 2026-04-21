@@ -109,7 +109,7 @@ export default function AboutPage() {
             the team better just by being in it. I pick things up fast, I ask
             the right questions, and when something needs to get done I get it
             done. Also pretty fun to grab a coffee with. Currently looking for
-            my next challenge in Rotterdam.
+            my next challenge.
           </p>
         </div>
       </motion.div>
